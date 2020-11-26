@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataSourcesConverter.Components.Input.APIRest;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,12 @@ namespace DataSourcesConverter {
     public partial class FormHome : Form {
         public FormHome() {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormApiRest t = new FormApiRest();
+            t.Show();
         }
     }
 }

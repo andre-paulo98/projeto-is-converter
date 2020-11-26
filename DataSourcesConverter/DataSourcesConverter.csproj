@@ -46,6 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Input\APIRest\FormApiRest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Input\APIRest\FormApiRest.Designer.cs">
+      <DependentUpon>FormApiRest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Input\Input.cs" />
+    <Compile Include="Components\Input\APIRest\ApiRest.cs" />
     <Compile Include="FormHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +62,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Components\Input\APIRest\FormApiRest.resx">
+      <DependentUpon>FormApiRest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormHome.resx">
       <DependentUpon>FormHome.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\Output\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

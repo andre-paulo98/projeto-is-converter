@@ -1,6 +1,6 @@
 ﻿
-namespace DataSourcesConverter {
-    partial class FormHome {
+namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
+    partial class FormFileHtml {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -24,23 +24,12 @@ namespace DataSourcesConverter {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.SuspendLayout();
-            // 
-            // FormHome
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 486);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "FormHome";
-            this.Text = "Converter";
-            this.Load += new System.EventHandler(this.FormHome_Load);
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "FormFileHtml";
         }
 
         #endregion
     }
 }
-

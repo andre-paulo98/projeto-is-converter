@@ -1,43 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.Dynamic;
 using System.Net.Http;
-using System.Text;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace DataSourcesConverter.Components.Input.APIRest
 {
     public partial class FormApiRest : Form
     {
-        private static readonly HttpClient client = new HttpClient();
+        private HttpClient client = new HttpClient();
+        public ApiRest output;
 
         public FormApiRest()
         {
             InitializeComponent();
+            output = new ApiRest();
         }
 
-        private void bt_request_Click(object sender, EventArgs e)
+        private async Task<string> GetProductAsync()
         {
-           Task<string> task = client.GetStringAsync("https://newsapi.org/v1/sources?country=us");
-
-            task.
-
-            task.ContinueWith((x)=>
+            string body = null;
+            HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
+            if (response.IsSuccessStatusCode)
             {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    rtb_result.Text = x.Result;
-                });
-                
-            });
+                body = await response.Content.ReadAsStringAsync();
+            }
+            return body;
         }
-        private void t(String result)
+
+        private async void bt_request_Click(object sender, EventArgs e)
+        {
+            bt_request.Enabled = false;
+            client.BaseAddress = new Uri(tb_url.Text);
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //Get request body as json String
+            string body = await GetProductAsync();
+            rtb_result.Text = body;
+            
+            bt_request.Enabled = true;
+        }
+
+        private void FormApiRest_Load(object sender, EventArgs e)
         {
 
         }
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            output.url = tb_url.Text;
+            Close();
+        }
+
     }
 }

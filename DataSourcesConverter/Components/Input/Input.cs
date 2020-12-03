@@ -7,19 +7,12 @@ using System.Windows.Forms;
 
 namespace DataSourcesConverter.Components.Input
 {
-    class Input
+    public abstract class Input
     {
-        public InputType type { get; set; }
-        public System.Windows.Forms.Form form { get; set; }
-        public List<dynamic> output { get; set; }
+        InputType type { get; }
 
-        public Input(InputType type, System.Windows.Forms.Form form)
-        {
-            this.form = form;
-            this.type = type;
-        }
-
-
+        public abstract Input run();
+        
     }
     enum InputType
     {

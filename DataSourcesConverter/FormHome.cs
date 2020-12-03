@@ -1,4 +1,5 @@
-﻿using DataSourcesConverter.Components.Input.APIRest;
+﻿using DataSourcesConverter.Components.Input;
+using DataSourcesConverter.Components.Input.APIRest;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,12 +14,21 @@ namespace DataSourcesConverter {
     public partial class FormHome : Form {
         public FormHome() {
             InitializeComponent();
+            cb_inputType.DataSource = Enum.GetNames(typeof(InputType)).ToList();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FormApiRest t = new FormApiRest();
-            t.Show();
+            FormApiRest form = new FormApiRest();
+            form.ShowDialog();
+            var a = form.output;
+        }
+
+        private void cb_inputType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            
+
         }
     }
 }

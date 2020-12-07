@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DataSourcesConverter.Components.Input
+namespace DataSourcesConverter.Components.Inputs
 {
-    public abstract class Input
+    public abstract class FlowInput
     {
         InputType type { get; }
 
-        public abstract Input run();
+        public abstract dynamic run();
         
     }
     enum InputType

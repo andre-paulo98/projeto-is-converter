@@ -45,7 +45,6 @@ namespace DataSourcesConverter {
             this.cb_inputType.Name = "cb_inputType";
             this.cb_inputType.Size = new System.Drawing.Size(328, 28);
             this.cb_inputType.TabIndex = 1;
-            this.cb_inputType.SelectedIndexChanged += new System.EventHandler(this.cb_inputType_SelectedIndexChanged);
             // 
             // FormHome
             // 

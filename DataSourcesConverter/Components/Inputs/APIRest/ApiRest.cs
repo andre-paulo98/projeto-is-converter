@@ -11,41 +11,19 @@ using Newtonsoft.Json.Linq;
 namespace DataSourcesConverter.Components.Inputs {
     public class ApiRest : FlowInput {
         public string url { get; set; }
+        public string method { get; set; }
 
-        public override dynamic run() {
-            JToken json = makeRequest(url);
-
-            var converter = new ExpandoObjectConverter();
-
-            dynamic output;
-
-            if (json.Type == JTokenType.Array) {
-                output = JsonConvert.DeserializeObject<List<ExpandoObject>>(json.ToString());
-            } else if (json.Type == JTokenType.Object) {
-                output = JsonConvert.DeserializeObject<ExpandoObject>(json.ToString());
-            } else {
-                throw new NotSupportedException("Json output not suported!!");
-            }
-
-            return output;
-        }
-
-
-
-        public static JToken makeRequest(string uri) {
-            JToken json = null;
+        public override string run() {
+            string json = null;
             try {
-                HttpWebRequest request = WebRequest.CreateHttp(uri);
-                request.Method = "GET";
+                HttpWebRequest request = WebRequest.CreateHttp(url);
+                request.Method = method;
 
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 using (Stream responseStream = response.GetResponseStream())
                 using (StreamReader myStreamReader = new StreamReader(responseStream, Encoding.UTF8)) {
-                    string responseJSON = myStreamReader.ReadToEnd();
-                    json = JToken.Parse(responseJSON);
+                    json = myStreamReader.ReadToEnd();
                 }
-
-
             } catch (Exception) {
                 throw;
             }

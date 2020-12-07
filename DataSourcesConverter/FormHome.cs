@@ -1,4 +1,5 @@
-﻿using DataSourcesConverter.Components.Output.FileHtmlOutput;
+﻿using DataSourcesConverter.Components.Inputs.APIRest;
+using DataSourcesConverter.Components.Output.FileHtmlOutput;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -34,6 +35,20 @@ namespace DataSourcesConverter {
             var a = message[0];
 
             Debug.WriteLine("aa");*/
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormApiRest form = new FormApiRest();
+            form.ShowDialog();
+            var a = form.output;
+        }
+
+        private void cb_inputType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            
+
         }
     }
 }

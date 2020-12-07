@@ -6,25 +6,30 @@ namespace DataSourcesConverter.Components.Inputs.APIRest
 {
     public partial class FormApiRest : Form
     {
-        public ApiRest output;
+        private ApiRest output;
 
-        public FormApiRest()
+        public FormApiRest(ApiRest api)
         {
             InitializeComponent();
-            output = new ApiRest();
+            output = api;
+            tb_url.Text = output.url;
+            cbMethod.SelectedIndex = 0;
         }
 
         private void bt_request_Click(object sender, EventArgs e)
         {
+            if (cbMethod.SelectedIndex == -1) {
+                MessageBox.Show("Please select a method to use","Method not set",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                return;
+            }
 
             bt_request.Enabled = false;
-            
             try
             {
-                JToken json = ApiRest.makeRequest(tb_url.Text);
-                rtb_result.Text = json.ToString();
-
                 output.url = tb_url.Text;
+                output.method = cbMethod.Text;
+                rtb_result.Text = output.run();
+                                
                 bt_save.Enabled = true;
             }
             catch (Exception ex)
@@ -40,11 +45,12 @@ namespace DataSourcesConverter.Components.Inputs.APIRest
 
         private void bt_save_Click(object sender, EventArgs e)
         {
-            output.url = tb_url.Text;
+            DialogResult = DialogResult.OK;
             Close();
         }
 
         private void bt_cancel_Click(object sender, EventArgs e) {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
     }

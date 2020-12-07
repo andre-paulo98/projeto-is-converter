@@ -11,7 +11,7 @@ namespace DataSourcesConverter.Components.Inputs
     {
         InputType type { get; }
 
-        public abstract dynamic run();
+        public abstract string run();
         
     }
     enum InputType

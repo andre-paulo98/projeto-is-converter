@@ -4,14 +4,15 @@ using Newtonsoft.Json.Linq;
 
 namespace DataSourcesConverter.Components.Inputs.APIRest
 {
-    public partial class FormApiRest : Form
+    public partial class FormApiRestInput : Form
     {
         private ApiRest output;
 
-        public FormApiRest(ApiRest api)
+        public FormApiRestInput(ApiRest api)
         {
             InitializeComponent();
             output = api;
+            tbName.Text = output.Name;
             tb_url.Text = output.url;
             cbMethod.SelectedIndex = 0;
         }
@@ -45,6 +46,7 @@ namespace DataSourcesConverter.Components.Inputs.APIRest
 
         private void bt_save_Click(object sender, EventArgs e)
         {
+            output.Name = tbName.Text;
             DialogResult = DialogResult.OK;
             Close();
         }

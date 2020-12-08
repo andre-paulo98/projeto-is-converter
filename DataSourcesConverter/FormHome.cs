@@ -1,5 +1,8 @@
-﻿using DataSourcesConverter.Components.Inputs.APIRest;
+﻿using DataSourcesConverter.Components;
+using DataSourcesConverter.Components.Inputs;
+using DataSourcesConverter.Components.Inputs.APIRest;
 using DataSourcesConverter.Components.Output.FileHtmlOutput;
+using DataSourcesConverter.teste;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
@@ -16,46 +19,79 @@ using System.Windows.Forms;
 
 namespace DataSourcesConverter {
     public partial class FormHome : Form {
+
+        private Dictionary<int, Flow> flows = new Dictionary<int, Flow>();
+        private Dictionary<int, TilesItemView> tilesItemViews = new Dictionary<int, TilesItemView>();
+        private int NEXT_ID = 1;
+
         public FormHome() {
             InitializeComponent();
         }
 
+        
+
         private void FormHome_Load(object sender, EventArgs e) {
-            var converter = new ExpandoObjectConverter();
-            /*dynamic message = JsonConvert.DeserializeObject<ExpandoObject>("{'number':1000, 'str':'string', " +
-                "'array1': [1,2,3,4,5,6], 'array': [{'test': 'abc', 't': 1, 'a': 55, 'b': 90}, " +
-                "{'test5': 1, 't':'abc'}, {'o': 5} ]}", converter);*/
-            //error 
-            //dynamic message = JsonConvert.DeserializeObject<ExpandoObject>("{'array': [{'test': 'abc', 't': 1}, {'test5': 1, 't':'abc'}, {'o': 5} ]}", converter);
-            //dynamic message = JsonConvert.DeserializeObject<ExpandoObject>("{'array': [ 1,2,3]}", converter);
-            dynamic message = JsonConvert.DeserializeObject<ExpandoObject>("{'bookstore':{'book':[{'category':'CHILDREN','title':'Chalottes Web','author':'E.B. White','year':'1952','price':'13.60'},{'category':'WEB','title':'Beginning XML','author':'Joe Fawcett','year':'2012','price':'31.30','rate':'4'},{'category':'WEB','title':'Programming .NET Web Services','author':'Alex Ferrara','year':'2002','price':'38.36','rate':'3'}]}}", converter);
-            // good 
-            //dynamic message = JsonConvert.DeserializeObject<ExpandoObject>("{'number':1000,'str':'string','array':{'number2':10002,'str2':'string2','array2':'asd2','array':{'number2':10002,'str2':'string2','array2':'asd2','array3':{'number':10002,'str':'string2','array':'asd2'},'array4':{'number':10002,'str':'string2','array2':'asd2'}}}}", converter);
-            //good dynamic message = JsonConvert.DeserializeObject<ExpandoObject>("{number:1000, str:'string', array: 'asd'}", converter);
-            //good dynamic message = JsonConvert.DeserializeObject<List<ExpandoObject>>("[{number:1000, str:'string', array: 'asd'},{number:1000, str:'string', array: 'asd'}]", converter);
+
+            Flow flow = new Flow() { ID = NEXT_ID++, Input = null, Output = null };
+            flows.Add(flow.ID, flow);
+
+            TilesItemView tile = new TilesItemView(flow, runCallback, setInputCallback, setOutputCallback);
+            tilesItemViews.Add(flow.ID, tile);
 
 
-            FileHtml outputFileHtml = new FileHtml();
-            outputFileHtml.output(message);
-            /*
-            
-            var a = message[0];
+            flowsPanel.Controls.Add(tile);
+            flowLayoutPanel1_SizeChanged(null, null);
 
-            Debug.WriteLine("aa");*/
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            FormApiRest form = new FormApiRest();
-            form.ShowDialog();
-            var a = form.output;
+        private void setOutputCallback(int id) {
+            throw new NotImplementedException();
         }
 
-        private void cb_inputType_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void setInputCallback(int id) {
 
-            
+            InputType selected;
+            if(flows[id].Input == null) {
+                FormSelectType select = new FormSelectType(true);
+                select.ShowDialog(); // TODO check if result was ok
+                selected = select.InputTypeSelected.Value;
+            } else {
+                selected = flows[id].Input.Type;
+            }
 
+            if (selected == InputType.RestApi) {
+                ApiRest input;
+                if ((ApiRest)flows[id].Input != null)
+                    input = (ApiRest)flows[id].Input;
+                else
+                    input = new ApiRest();
+
+                FormApiRestInput form = new FormApiRestInput(input);
+                form.ShowDialog();
+
+                flows[id].Input = input;
+                updateFlowsList(id);
+
+            } else if (selected == InputType.XmlFile) {
+                //
+            }
+        }
+
+        private void runCallback(int id) {
+            throw new NotImplementedException();
+        }
+
+        private void updateFlowsList(int id) {
+            TilesItemView tile = tilesItemViews[id];
+            if(tile != null) {
+                tile.updateFlow();
+            }
+
+        }
+
+        private void flowLayoutPanel1_SizeChanged(object sender, EventArgs e) {
+            panelFirstItemFlowLayout.Size = new Size(flowsPanel.Size.Width - (flowsPanel.VerticalScroll.Visible ? SystemInformation.VerticalScrollBarWidth : 0) - 5, 1);
         }
     }
 }

@@ -9,12 +9,13 @@ namespace DataSourcesConverter.Components.Inputs
 {
     public abstract class FlowInput
     {
-        InputType type { get; }
+        public InputType Type { get; }
+        public string Name { get; set; }
 
         public abstract string run();
         
     }
-    enum InputType
+    public enum InputType
     {
         RestApi,
         XmlFile,

@@ -6,10 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataSourcesConverter.Components.Output.FileHtmlOutput
-{
-    class FileHtml
-    {
+namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
+    public class FileHtml : FlowOutput {
 
         private const string BASE_HTML_INIT = "<html><body>";
         private const string BASE_HTML_END = "</body></html>";
@@ -94,6 +92,10 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput
             html += BASE_HTML_END;
 
             return html;
+        }
+
+        public override bool run(dynamic data) {
+            return true;
         }
 
         private string Decider(dynamic data)

@@ -72,23 +72,29 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Output\FileHtml\FileHtml.cs" />
-    <Compile Include="Components\Output\FileHtml\FormFileHtml.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Components\Output\FileHtml\FormFileHtml.Designer.cs">
-      <DependentUpon>FormFileHtml.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Components\Output\Output.cs" />
     <Compile Include="Components\Flow.cs" />
-    <Compile Include="Components\Inputs\APIRest\FormApiRest.cs">
+    <Compile Include="Components\FormSelectType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Components\Inputs\APIRest\FormApiRest.Designer.cs">
-      <DependentUpon>FormApiRest.cs</DependentUpon>
+    <Compile Include="Components\FormSelectType.Designer.cs">
+      <DependentUpon>FormSelectType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Output\FileHtml\FileHtmlOutput.cs" />
+    <Compile Include="Components\Output\FileHtml\FormFileHtmlOutput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Output\FileHtml\FormFileHtmlOutput.Designer.cs">
+      <DependentUpon>FormFileHtmlOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Output\FlowOutput.cs" />
+    <Compile Include="Components\Inputs\APIRest\FormApiRestInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Inputs\APIRest\FormApiRestInput.Designer.cs">
+      <DependentUpon>FormApiRestInput.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Inputs\FlowInput.cs" />
-    <Compile Include="Components\Inputs\APIRest\ApiRest.cs" />
+    <Compile Include="Components\Inputs\APIRest\ApiRestInput.cs" />
     <Compile Include="FormHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,8 +103,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Components\Inputs\APIRest\FormApiRest.resx">
-      <DependentUpon>FormApiRest.cs</DependentUpon>
+    <EmbeddedResource Include="Components\FormSelectType.resx">
+      <DependentUpon>FormSelectType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Inputs\APIRest\FormApiRestInput.resx">
+      <DependentUpon>FormApiRestInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="teste\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="teste\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemViews\TilesItemView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ItemViews\TilesItemView.Designer.cs">
+      <DependentUpon>TilesItemView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Components\Output\FileHtml\FormFileHtmlOutput.resx">
+      <DependentUpon>FormFileHtmlOutput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormHome.resx">
       <DependentUpon>FormHome.cs</DependentUpon>
@@ -111,7 +135,14 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="teste\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemViews\TilesItemView.resx">
+      <DependentUpon>TilesItemView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -127,8 +158,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\Output\" />
-    <Folder Include="Components\Input\" />
+    <None Include="Resources\DataSourcesConverter-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right-arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

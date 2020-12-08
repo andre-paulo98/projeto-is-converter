@@ -24,48 +24,109 @@ namespace DataSourcesConverter {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.button1 = new System.Windows.Forms.Button();
-            this.cb_inputType = new System.Windows.Forms.ComboBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHome));
+            this.flowsPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelFirstItemFlowLayout = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.dadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.executarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flowsPanel.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // flowsPanel
             // 
-            this.button1.Location = new System.Drawing.Point(427, 91);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 62);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.flowsPanel.AutoScroll = true;
+            this.flowsPanel.Controls.Add(this.panelFirstItemFlowLayout);
+            this.flowsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowsPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowsPanel.Location = new System.Drawing.Point(0, 24);
+            this.flowsPanel.Name = "flowsPanel";
+            this.flowsPanel.Size = new System.Drawing.Size(944, 462);
+            this.flowsPanel.TabIndex = 0;
+            this.flowsPanel.WrapContents = false;
+            this.flowsPanel.SizeChanged += new System.EventHandler(this.flowLayoutPanel1_SizeChanged);
             // 
-            // cb_inputType
+            // panelFirstItemFlowLayout
             // 
-            this.cb_inputType.FormattingEnabled = true;
-            this.cb_inputType.Location = new System.Drawing.Point(48, 91);
-            this.cb_inputType.Name = "cb_inputType";
-            this.cb_inputType.Size = new System.Drawing.Size(328, 28);
-            this.cb_inputType.TabIndex = 1;
+            this.panelFirstItemFlowLayout.BackColor = System.Drawing.SystemColors.Control;
+            this.panelFirstItemFlowLayout.Location = new System.Drawing.Point(0, 0);
+            this.panelFirstItemFlowLayout.Margin = new System.Windows.Forms.Padding(0);
+            this.panelFirstItemFlowLayout.Name = "panelFirstItemFlowLayout";
+            this.panelFirstItemFlowLayout.Size = new System.Drawing.Size(1, 1);
+            this.panelFirstItemFlowLayout.TabIndex = 0;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dadosToolStripMenuItem,
+            this.executarToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(944, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // dadosToolStripMenuItem
+            // 
+            this.dadosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importarXMLToolStripMenuItem,
+            this.exportarXMLToolStripMenuItem});
+            this.dadosToolStripMenuItem.Name = "dadosToolStripMenuItem";
+            this.dadosToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.dadosToolStripMenuItem.Text = "Dados";
+            // 
+            // importarXMLToolStripMenuItem
+            // 
+            this.importarXMLToolStripMenuItem.Name = "importarXMLToolStripMenuItem";
+            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.importarXMLToolStripMenuItem.Text = "Importar XML";
+            // 
+            // exportarXMLToolStripMenuItem
+            // 
+            this.exportarXMLToolStripMenuItem.Name = "exportarXMLToolStripMenuItem";
+            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.exportarXMLToolStripMenuItem.Text = "Exportar XML";
+            // 
+            // executarToolStripMenuItem
+            // 
+            this.executarToolStripMenuItem.Name = "executarToolStripMenuItem";
+            this.executarToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.executarToolStripMenuItem.Text = "Executar";
             // 
             // FormHome
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 486);
-            this.Controls.Add(this.cb_inputType);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.flowsPanel);
+            this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormHome";
             this.Text = "Converter";
             this.Load += new System.EventHandler(this.FormHome_Load);
+            this.flowsPanel.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox cb_inputType;
+        private System.Windows.Forms.FlowLayoutPanel flowsPanel;
+        private System.Windows.Forms.Panel panelFirstItemFlowLayout;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem dadosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importarXMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportarXMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem executarToolStripMenuItem;
     }
 }
 

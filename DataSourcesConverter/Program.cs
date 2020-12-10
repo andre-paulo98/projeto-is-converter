@@ -1,5 +1,4 @@
-﻿using DataSourcesConverter.Components.Output.FileHtmlOutput;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +13,7 @@ namespace DataSourcesConverter {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormFileHtmlOutput(new FileHtmlOutput()));
+            Application.Run(new FormHome());
         }
     }
 }

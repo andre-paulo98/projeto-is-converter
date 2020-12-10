@@ -6,33 +6,27 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
     public partial class FormFileHtmlOutput : Form {
 
         private FileHtmlOutput fileHtml;
-        public bool newFile;
 
         public FormFileHtmlOutput(FileHtmlOutput fileHtmlOutput) {
             InitializeComponent();
             fileHtml = fileHtmlOutput;
             tbName.Text = fileHtml.Name;
             tbPath.Text = fileHtml.Path;
-            newFile = cbNewFile.Checked;
-
+            fileHtml.Overwrite = cbNewFile.Checked;
         }
 
         private void btOpenFileDialog_Click(object sender, EventArgs e) {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "|*.html";
 
-            //Quero criar um ficheiro novo
-            if (newFile)
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    tbPath.Text = Path.GetFullPath(sfd.FileName);
-                }
-                else
-                {
-                    MessageBox.Show("Não foi possivel encontrar o caminho do ficheiro!");
-                }
-            }                        
+                tbPath.Text = Path.GetFullPath(sfd.FileName);
+            }
+            else
+            {
+                MessageBox.Show("Não foi possivel encontrar o caminho do ficheiro!");
+            }
         }
 
         private void btSave_Click(object sender, EventArgs e) {
@@ -49,17 +43,7 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
 
         private void cbNewFile_CheckedChanged(object sender, EventArgs e)
         {
-            newFile = cbNewFile.Checked;
-            if (newFile)
-            {
-                tbPath.Enabled = true;
-                btOpenFileDialog.Enabled = true;
-            }
-            else
-            {
-                tbPath.Enabled = false;
-                btOpenFileDialog.Enabled = false;
-            }
+            fileHtml.Overwrite = cbNewFile.Checked;
         }
 
         private void cbNewFile_MouseHover(object sender, EventArgs e)

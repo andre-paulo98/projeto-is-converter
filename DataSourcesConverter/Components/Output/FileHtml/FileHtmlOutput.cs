@@ -13,6 +13,7 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
         private const string BASE_HTML_END = "</body></html>";
 
         public string Path { get; set; }
+        public bool Overwrite { get; set; }
 
         public void outputuhjkg(dynamic data)
         {

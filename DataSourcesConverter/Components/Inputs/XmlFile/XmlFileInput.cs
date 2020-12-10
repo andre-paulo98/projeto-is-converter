@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using System.Xml;
 
 namespace DataSourcesConverter.Components.Inputs.XmlFile {
-    public class XmlFile : FlowInput {
+    public class XmlFileInput : FlowInput {
         public string filePath { get; set; }
         XmlDocument dom;
 
-        public XmlFile() {
+        public XmlFileInput() {
             dom = new XmlDocument();
         }
 

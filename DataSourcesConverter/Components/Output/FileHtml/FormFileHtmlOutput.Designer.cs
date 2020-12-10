@@ -1,5 +1,5 @@
 ﻿
-namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
+namespace DataSourcesConverter.Components.Output.FileHtml {
     partial class FormFileHtmlOutput {
         /// <summary>
         /// Required designer variable.
@@ -44,7 +44,7 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             this.label1.Location = new System.Drawing.Point(13, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 25);
+            this.label1.Size = new System.Drawing.Size(55, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nome:";
             // 
@@ -55,7 +55,7 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             this.tbName.Location = new System.Drawing.Point(76, 6);
             this.tbName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(175, 30);
+            this.tbName.Size = new System.Drawing.Size(175, 26);
             this.tbName.TabIndex = 1;
             // 
             // label2
@@ -64,7 +64,7 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             this.label2.Location = new System.Drawing.Point(13, 45);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 25);
+            this.label2.Size = new System.Drawing.Size(76, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Caminho:";
             // 
@@ -76,7 +76,7 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             this.tbPath.Location = new System.Drawing.Point(104, 42);
             this.tbPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbPath.Name = "tbPath";
-            this.tbPath.Size = new System.Drawing.Size(260, 30);
+            this.tbPath.Size = new System.Drawing.Size(260, 26);
             this.tbPath.TabIndex = 3;
             // 
             // btSave
@@ -94,7 +94,6 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             // btOpenFileDialog
             // 
             this.btOpenFileDialog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btOpenFileDialog.Enabled = false;
             this.btOpenFileDialog.Location = new System.Drawing.Point(371, 42);
             this.btOpenFileDialog.Name = "btOpenFileDialog";
             this.btOpenFileDialog.Size = new System.Drawing.Size(35, 30);
@@ -138,9 +137,9 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             // 
             this.cbNewFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbNewFile.AutoSize = true;
-            this.cbNewFile.Location = new System.Drawing.Point(254, 8);
+            this.cbNewFile.Location = new System.Drawing.Point(284, 8);
             this.cbNewFile.Name = "cbNewFile";
-            this.cbNewFile.Size = new System.Drawing.Size(154, 29);
+            this.cbNewFile.Size = new System.Drawing.Size(124, 24);
             this.cbNewFile.TabIndex = 9;
             this.cbNewFile.Text = "Novo Ficheiro";
             this.cbNewFile.UseVisualStyleBackColor = true;
@@ -149,9 +148,9 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             // 
             // FormFileHtmlOutput
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 118);
+            this.ClientSize = new System.Drawing.Size(421, 126);
             this.Controls.Add(this.cbNewFile);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btOpenFileDialog);

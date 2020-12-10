@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 
-namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
+namespace DataSourcesConverter.Components.Output.FileHtml {
     public partial class FormFileHtmlOutput : Form {
 
         private FileHtmlOutput fileHtml;

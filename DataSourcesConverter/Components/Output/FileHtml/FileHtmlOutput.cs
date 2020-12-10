@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
+namespace DataSourcesConverter.Components.Output.FileHtml {
     public class FileHtmlOutput : FlowOutput {
 
         private const string BASE_HTML_INIT = "<html><body>";

@@ -8,7 +8,7 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json.Linq;
 
-namespace DataSourcesConverter.Components.Inputs {
+namespace DataSourcesConverter.Components.Inputs.APIRest {
     public class ApiRest : FlowInput {
         public string url { get; set; }
         public string method { get; set; }

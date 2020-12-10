@@ -1,8 +1,9 @@
 ﻿using DataSourcesConverter.Components;
 using DataSourcesConverter.Components.Inputs;
 using DataSourcesConverter.Components.Inputs.APIRest;
+using DataSourcesConverter.Components.Inputs.XmlFile;
 using DataSourcesConverter.Components.Output;
-using DataSourcesConverter.Components.Output.FileHtmlOutput;
+using DataSourcesConverter.Components.Output.FileHtml;
 using DataSourcesConverter.teste;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -37,6 +38,7 @@ namespace DataSourcesConverter {
 
         private void setOutputCallback(int id) {
             bool continueOutput;
+            bool isNew = false;
 
             do {
                 continueOutput = false;
@@ -50,6 +52,7 @@ namespace DataSourcesConverter {
                         return;
                     }
                     selected = select.OutputTypeSelected.Value;
+                    isNew = true;
                 } else {
                     selected = flows[id].Output.Type;
                 }
@@ -77,7 +80,7 @@ namespace DataSourcesConverter {
                 }*/
 
 
-            } while (continueOutput);
+            } while (continueOutput && isNew);
 
 
         }
@@ -123,7 +126,21 @@ namespace DataSourcesConverter {
 
 
                 } else if (selected == InputType.XmlFile) {
-                    //
+                    XmlFile input;
+                    if ((XmlFile)flows[id].Input != null)
+                        input = (XmlFile)flows[id].Input;
+                    else
+                        input = new XmlFile();
+
+                    FormXmlFile form = new FormXmlFile(input);
+
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.OK) {
+                        flows[id].Input = input;
+                        updateFlowsList(id);
+                    } else {
+                        continueInput = true;
+                    }
                 }
 
             } while (continueInput && isNew);

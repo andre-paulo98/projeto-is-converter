@@ -32,6 +32,7 @@ namespace DataSourcesConverter {
             this.importarXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.executarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adicionarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowsPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +63,8 @@ namespace DataSourcesConverter {
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dadosToolStripMenuItem,
-            this.executarToolStripMenuItem});
+            this.executarToolStripMenuItem,
+            this.adicionarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(944, 24);
@@ -81,20 +83,30 @@ namespace DataSourcesConverter {
             // importarXMLToolStripMenuItem
             // 
             this.importarXMLToolStripMenuItem.Name = "importarXMLToolStripMenuItem";
-            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importarXMLToolStripMenuItem.Text = "Importar XML";
+            this.importarXMLToolStripMenuItem.Click += new System.EventHandler(this.importarXMLToolStripMenuItem_Click);
             // 
             // exportarXMLToolStripMenuItem
             // 
             this.exportarXMLToolStripMenuItem.Name = "exportarXMLToolStripMenuItem";
-            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportarXMLToolStripMenuItem.Text = "Exportar XML";
+            this.exportarXMLToolStripMenuItem.Click += new System.EventHandler(this.exportarXMLToolStripMenuItem_Click);
             // 
             // executarToolStripMenuItem
             // 
             this.executarToolStripMenuItem.Name = "executarToolStripMenuItem";
             this.executarToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.executarToolStripMenuItem.Text = "Executar";
+            this.executarToolStripMenuItem.Click += new System.EventHandler(this.executarToolStripMenuItem_Click);
+            // 
+            // adicionarToolStripMenuItem
+            // 
+            this.adicionarToolStripMenuItem.Name = "adicionarToolStripMenuItem";
+            this.adicionarToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
+            this.adicionarToolStripMenuItem.Text = "Adicionar";
+            this.adicionarToolStripMenuItem.Click += new System.EventHandler(this.adicionarToolStripMenuItem_Click);
             // 
             // FormHome
             // 
@@ -127,6 +139,7 @@ namespace DataSourcesConverter {
         private System.Windows.Forms.ToolStripMenuItem importarXMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportarXMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem executarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adicionarToolStripMenuItem;
     }
 }
 

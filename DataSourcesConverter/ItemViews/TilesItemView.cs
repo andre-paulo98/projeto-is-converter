@@ -18,17 +18,19 @@ namespace DataSourcesConverter.teste {
         public Flow Flow { get; private set; }
 
         public delegate void RunCallback(int id);
+        public delegate void DeleteCallback(int id);
         public delegate void SetInputCallback(int id);
         public delegate void SetOutputCallback(int id);
 
         private RunCallback runCallback;
+        private DeleteCallback deleteCallback;
         private SetInputCallback setInputCallback;
         private SetOutputCallback setOutputCallback;
 
         public TilesItemView() {
         }
 
-        public TilesItemView(Flow flow, RunCallback runCallback, SetInputCallback setInputCallback, SetOutputCallback setOutputCallback) {
+        public TilesItemView(Flow flow, RunCallback runCallback, SetInputCallback setInputCallback, SetOutputCallback setOutputCallback, DeleteCallback deleteCallback) {
 
             if (flow == null) {
                 flow = new Flow {
@@ -40,6 +42,7 @@ namespace DataSourcesConverter.teste {
             this.runCallback = runCallback;
             this.setInputCallback = setInputCallback;
             this.setOutputCallback = setOutputCallback;
+            this.deleteCallback = deleteCallback;
 
             InitializeComponent();
 
@@ -71,6 +74,14 @@ namespace DataSourcesConverter.teste {
 
             if (Flow.Input == null || Flow.Output == null) {
                 btRun.Visible = false;
+            } else {
+                btRun.Visible = true;
+            }
+
+            if(Flow.Input == null) {
+                btDelete.Visible = false;
+            } else {
+                btDelete.Visible = true;
             }
         }
 
@@ -89,6 +100,10 @@ namespace DataSourcesConverter.teste {
 
         private void btRun_Click(object sender, EventArgs e) {
             runCallback(Flow.ID);
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+            deleteCallback(Flow.ID);
         }
     }
 }

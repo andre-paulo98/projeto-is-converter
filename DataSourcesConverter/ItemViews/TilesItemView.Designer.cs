@@ -26,7 +26,6 @@ namespace DataSourcesConverter.teste {
         private void InitializeComponent() {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btRun = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btSetInput = new System.Windows.Forms.Button();
             this.groupBoxInput = new System.Windows.Forms.GroupBox();
@@ -41,12 +40,16 @@ namespace DataSourcesConverter.teste {
             this.lblTypeOutput = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btDelete = new System.Windows.Forms.Button();
+            this.btRun = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxInput.SuspendLayout();
             this.panelOutput.SuspendLayout();
             this.groupBoxOutput.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -58,9 +61,9 @@ namespace DataSourcesConverter.teste {
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btRun, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panelOutput, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -81,18 +84,6 @@ namespace DataSourcesConverter.teste {
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // btRun
-            // 
-            this.btRun.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btRun.Location = new System.Drawing.Point(1, 1);
-            this.btRun.Margin = new System.Windows.Forms.Padding(1);
-            this.btRun.Name = "btRun";
-            this.btRun.Size = new System.Drawing.Size(63, 90);
-            this.btRun.TabIndex = 3;
-            this.btRun.Text = "R";
-            this.btRun.UseVisualStyleBackColor = true;
-            this.btRun.Click += new System.EventHandler(this.btRun_Click);
             // 
             // panel1
             // 
@@ -251,6 +242,56 @@ namespace DataSourcesConverter.teste {
             this.label4.Text = "Nome:";
             this.label4.Click += new System.EventHandler(this.SetOutput_Click);
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Controls.Add(this.btDelete, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btRun, 0, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 3, 2, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(60, 86);
+            this.tableLayoutPanel2.TabIndex = 6;
+            // 
+            // btDelete
+            // 
+            this.btDelete.BackColor = System.Drawing.Color.Red;
+            this.btDelete.BackgroundImage = global::DataSourcesConverter.Properties.Resources.delete_button;
+            this.btDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btDelete.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
+            this.btDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btDelete.Location = new System.Drawing.Point(0, 0);
+            this.btDelete.Margin = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(60, 28);
+            this.btDelete.TabIndex = 4;
+            this.btDelete.UseVisualStyleBackColor = false;
+            this.btDelete.Visible = false;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
+            // 
+            // btRun
+            // 
+            this.btRun.BackColor = System.Drawing.Color.LimeGreen;
+            this.btRun.BackgroundImage = global::DataSourcesConverter.Properties.Resources.run_button;
+            this.btRun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btRun.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btRun.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
+            this.btRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btRun.Location = new System.Drawing.Point(0, 30);
+            this.btRun.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
+            this.btRun.Name = "btRun";
+            this.btRun.Size = new System.Drawing.Size(60, 56);
+            this.btRun.TabIndex = 3;
+            this.btRun.UseVisualStyleBackColor = false;
+            this.btRun.Visible = false;
+            this.btRun.Click += new System.EventHandler(this.btRun_Click);
+            // 
             // TilesItemView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -271,6 +312,7 @@ namespace DataSourcesConverter.teste {
             this.panelOutput.ResumeLayout(false);
             this.groupBoxOutput.ResumeLayout(false);
             this.groupBoxOutput.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -294,5 +336,7 @@ namespace DataSourcesConverter.teste {
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btSetInput;
         private System.Windows.Forms.Panel panelOutput;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button btDelete;
     }
 }

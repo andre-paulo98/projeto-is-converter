@@ -7,10 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
-    public class FileHtml : FlowOutput {
+    public class FileHtmlOutput : FlowOutput {
 
         private const string BASE_HTML_INIT = "<html><body>";
         private const string BASE_HTML_END = "</body></html>";
+
+        public string Path { get; set; }
+        public bool Overwrite { get; set; }
 
         public void outputuhjkg(dynamic data)
         {

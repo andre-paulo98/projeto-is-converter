@@ -11,37 +11,31 @@ namespace DataSourcesConverter.Components.Inputs.Broker
 {
     public class BrokerInput :FlowInput
     {
-        public delegate void ReciveCallback(string data);
 
         MqttClient mClient = null;
-        ReciveCallback reciveCallback;
+        ReceiveCallback callback;
 
         public string host { get; set; }
 
         public List<string> topics { get; private set; }
 
-        public BrokerInput(ReciveCallback reciveCallback)
-        {
-            this.reciveCallback = reciveCallback;
-        }
-
-        public override string run()
-        {
-            connect();
-            return "";
+        public override void run(ReceiveCallback callback) {
+            this.callback = callback;
         }
 
         public bool connect()
         {
-            if(mClient != null || mClient.IsConnected)
+            if(mClient != null && mClient.IsConnected)
             {
                 mClient.Unsubscribe(topics.ToArray());
                 mClient.Disconnect();
             }
-
-            mClient = new MqttClient(host);
-            mClient.Connect(Guid.NewGuid().ToString());
-
+            try {
+                mClient = new MqttClient(host);
+                mClient.Connect(Guid.NewGuid().ToString());
+            }catch(Exception e) {
+                throw new Exception("Broker Input: " + e.Message);
+            }
             mClient.MqttMsgPublishReceived += MClient_MqttMsgPublishReceived;
 
             return mClient.IsConnected;
@@ -66,7 +60,7 @@ namespace DataSourcesConverter.Components.Inputs.Broker
                 new JProperty("topic", e.Topic),
                 new JProperty("message", Encoding.UTF8.GetString(e.Message))
                 );
-            reciveCallback(json.ToString());
+            callback(json.ToString());
         }
 
 

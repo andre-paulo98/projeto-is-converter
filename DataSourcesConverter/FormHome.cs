@@ -126,13 +126,13 @@ namespace DataSourcesConverter {
 
 
                 } else if (selected == InputType.XmlFile) {
-                    XmlFile input;
-                    if ((XmlFile)flows[id].Input != null)
-                        input = (XmlFile)flows[id].Input;
+                    XmlFileInput input;
+                    if ((XmlFileInput)flows[id].Input != null)
+                        input = (XmlFileInput)flows[id].Input;
                     else
-                        input = new XmlFile();
+                        input = new XmlFileInput();
 
-                    FormXmlFile form = new FormXmlFile(input);
+                    FormXmlFileInput form = new FormXmlFileInput(input);
 
                     DialogResult result = form.ShowDialog();
                     if (result == DialogResult.OK) {

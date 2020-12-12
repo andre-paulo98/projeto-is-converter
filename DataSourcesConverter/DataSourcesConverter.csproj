@@ -37,6 +37,9 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -79,19 +82,26 @@
     <Compile Include="Components\FormSelectType.Designer.cs">
       <DependentUpon>FormSelectType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Inputs\XmlFile\FormXmlFile.cs">
+    <Compile Include="Components\Inputs\Broker\BrokerInput.cs" />
+    <Compile Include="Components\Inputs\Broker\FormBrokerInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Components\Inputs\XmlFile\FormXmlFile.Designer.cs">
-      <DependentUpon>FormXmlFile.cs</DependentUpon>
+    <Compile Include="Components\Inputs\Broker\FormBrokerInput.Designer.cs">
+      <DependentUpon>FormBrokerInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Inputs\XmlFile\XmlFile.cs" />
+    <Compile Include="Components\Inputs\XmlFile\XmlFileInput.cs" />
     <Compile Include="Components\Output\APIRest\ApiRestOutput.cs" />
     <Compile Include="Components\Output\APIRest\FormApiRestOutput.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Components\Output\APIRest\FormApiRestOutput.Designer.cs">
       <DependentUpon>FormApiRestOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Inputs\XmlFile\FormXmlFileInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Inputs\XmlFile\FormXmlFileInput.Designer.cs">
+      <DependentUpon>FormXmlFileInput.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Output\FileHtml\FileHtmlOutput.cs" />
     <Compile Include="Components\Output\FileHtml\FormFileHtmlOutput.cs">
@@ -129,8 +139,11 @@
     <Compile Include="ItemViews\TilesItemView.Designer.cs">
       <DependentUpon>TilesItemView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Components\Inputs\XmlFile\FormXmlFile.resx">
-      <DependentUpon>FormXmlFile.cs</DependentUpon>
+    <EmbeddedResource Include="Components\Inputs\Broker\FormBrokerInput.resx">
+      <DependentUpon>FormBrokerInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Inputs\XmlFile\FormXmlFileInput.resx">
+      <DependentUpon>FormXmlFileInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Output\APIRest\FormApiRestOutput.resx">
       <DependentUpon>FormApiRestOutput.cs</DependentUpon>

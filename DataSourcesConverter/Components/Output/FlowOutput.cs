@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace DataSourcesConverter.Components.Output {
     public abstract class FlowOutput {
-        public OutputType Type { get; }
+        public OutputType Type { get; protected set; }
         public string Name { get; set; }
 
         public abstract bool run(string data);
 
     }
+
     public enum OutputType {
-        HtmlFile, // TODO fazer refactor para adicionar Output
-        ApiRest
+        HtmlFileOutput,
+        ApiRestOutput
     }
 }

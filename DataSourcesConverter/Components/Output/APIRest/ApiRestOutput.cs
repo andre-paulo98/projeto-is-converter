@@ -12,6 +12,10 @@ namespace DataSourcesConverter.Components.Output.APIRest
         public string url { get; set; }
         public string method { get; set; }
 
+        public ApiRestOutput() {
+            Type = OutputType.ApiRestOutput;
+        }
+
         public override bool run(string data)
         {
             HttpStatusCode code;

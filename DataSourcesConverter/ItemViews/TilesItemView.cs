@@ -85,7 +85,7 @@ namespace DataSourcesConverter.teste {
                 btDelete.Visible = true;
             }
 
-            if(Flow.Input != null && Flow.Input.Type == InputType.Broker && ((BrokerInput)Flow.Input).IsConnected) {
+            if(Flow.Input != null && Flow.Input.Type == InputType.BrokerInput && ((BrokerInput)Flow.Input).IsConnected) {
                 btRun.BackgroundImage = Properties.Resources.pause_button;
             } else {
                 btRun.BackgroundImage = Properties.Resources.run_button;

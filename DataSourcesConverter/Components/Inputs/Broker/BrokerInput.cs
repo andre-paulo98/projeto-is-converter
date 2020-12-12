@@ -27,7 +27,7 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
 
         public BrokerInput() {
             Topics = new List<string>();
-            Type = InputType.Broker;
+            Type = InputType.BrokerInput;
         }
 
         public override void run(ReceiveCallback callback) {

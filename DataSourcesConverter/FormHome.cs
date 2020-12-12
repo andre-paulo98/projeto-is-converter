@@ -61,9 +61,9 @@ namespace DataSourcesConverter {
                 }
 
                 Object output = flows[id].Output;
-                if (selected == OutputType.HtmlFile) {
+                if (selected == OutputType.HtmlFileOutput) {
                     continueOutput = SetParametersFlow<FileHtmlOutput, FormFileHtmlOutput>(ref output);
-                } else if (selected == OutputType.ApiRest) {
+                } else if (selected == OutputType.ApiRestOutput) {
                     continueOutput = SetParametersFlow<ApiRestOutput, FormApiRestOutput>(ref output);
                 }
                 flows[id].Output = (FlowOutput)output;
@@ -96,11 +96,11 @@ namespace DataSourcesConverter {
                 }
 
                 Object input = flows[id].Input;
-                if (selected == InputType.RestApi) {
+                if (selected == InputType.ApiRestInput) {
                     continueInput = SetParametersFlow<ApiRestInput, FormApiRestInput>(ref input);
-                } else if (selected == InputType.XmlFile) {
+                } else if (selected == InputType.XmlFileInput) {
                     continueInput = SetParametersFlow<XmlFileInput, FormXmlFileInput>(ref input);
-                } else if (selected == InputType.Broker) {
+                } else if (selected == InputType.BrokerInput) {
                     continueInput = SetParametersFlow<BrokerInput, FormBrokerInput>(ref input);
                 }
                 flows[id].Input = (FlowInput)input;
@@ -163,7 +163,7 @@ namespace DataSourcesConverter {
                     flow.Output.run(data);
                 });
                 Logger.Instance.info("MAIN", "Alterar botão");
-                if (flow.Input.Type == InputType.Broker) {
+                if (flow.Input.Type == InputType.BrokerInput) {
                     updateFlowsList(id);
                 }
 

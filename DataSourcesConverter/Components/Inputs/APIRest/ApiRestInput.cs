@@ -14,7 +14,7 @@ namespace DataSourcesConverter.Components.Inputs.APIRest {
         public string method { get; set; }
 
         public ApiRestInput() {
-            Type = InputType.RestApi;
+            Type = InputType.ApiRestInput;
         }
 
         public override void run(ReceiveCallback callback) {

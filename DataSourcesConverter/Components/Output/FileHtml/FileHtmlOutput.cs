@@ -17,6 +17,10 @@ namespace DataSourcesConverter.Components.Output.FileHtml {
         public string Path { get; set; }
         public bool Overwrite { get; set; }
 
+        public FileHtmlOutput() {
+            Type = OutputType.HtmlFileOutput;
+        }
+
         public override bool run(string data) {
             string exists = FileRead();
 

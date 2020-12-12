@@ -12,7 +12,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
         XmlDocument dom;
 
         public XmlFileInput() {
-            Type = InputType.XmlFile;
+            Type = InputType.XmlFileInput;
             dom = new XmlDocument();
         }
 

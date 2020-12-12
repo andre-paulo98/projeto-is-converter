@@ -86,6 +86,13 @@
       <DependentUpon>FormXmlFile.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\Inputs\XmlFile\XmlFile.cs" />
+    <Compile Include="Components\Output\APIRest\ApiRestOutput.cs" />
+    <Compile Include="Components\Output\APIRest\FormApiRestOutput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Output\APIRest\FormApiRestOutput.Designer.cs">
+      <DependentUpon>FormApiRestOutput.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Output\FileHtml\FileHtmlOutput.cs" />
     <Compile Include="Components\Output\FileHtml\FormFileHtmlOutput.cs">
       <SubType>Form</SubType>
@@ -124,6 +131,9 @@
     </Compile>
     <EmbeddedResource Include="Components\Inputs\XmlFile\FormXmlFile.resx">
       <DependentUpon>FormXmlFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Output\APIRest\FormApiRestOutput.resx">
+      <DependentUpon>FormApiRestOutput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Output\FileHtml\FormFileHtmlOutput.resx">
       <DependentUpon>FormFileHtmlOutput.cs</DependentUpon>
@@ -164,5 +174,6 @@
   <ItemGroup>
     <None Include="Resources\right-arrow.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

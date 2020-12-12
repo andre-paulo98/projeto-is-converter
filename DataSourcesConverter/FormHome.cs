@@ -4,6 +4,7 @@ using DataSourcesConverter.Components.Inputs.APIRest;
 using DataSourcesConverter.Components.Inputs.XmlFile;
 using DataSourcesConverter.Components.Output;
 using DataSourcesConverter.Components.Output.FileHtml;
+using DataSourcesConverter.Components.Output.APIRest;
 using DataSourcesConverter.teste;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -75,7 +76,27 @@ namespace DataSourcesConverter {
                     }
 
 
-                } /*else if (selected == OutputType.OUTRACENA) {
+                } else if (selected == OutputType.ApiRest) {
+                    ApiRestOutput output;
+                    if ((ApiRestOutput)flows[id].Output != null)
+                        output = (ApiRestOutput)flows[id].Output;
+                    else
+                        output = new ApiRestOutput();
+
+                    FormApiRestOutput form = new FormApiRestOutput(output);
+
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.OK) {
+                        flows[id].Output = output;
+                        updateFlowsList(id);
+                    } else {
+                        continueOutput = true;
+                    }
+
+
+                }
+
+                /*else if (selected == OutputType.OUTRACENA) {
                     //
                 }*/
 

@@ -9,10 +9,11 @@ namespace DataSourcesConverter.Components.Output {
         public OutputType Type { get; }
         public string Name { get; set; }
 
-        public abstract bool run(dynamic data);
+        public abstract bool run(string data);
 
     }
     public enum OutputType {
-        HtmlFile
+        HtmlFile,
+        ApiRest
     }
 }

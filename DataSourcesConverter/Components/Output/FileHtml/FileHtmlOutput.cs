@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
@@ -15,155 +17,109 @@ namespace DataSourcesConverter.Components.Output.FileHtml {
         public string Path { get; set; }
         public bool Overwrite { get; set; }
 
-        public void outputuhjkg(dynamic data)
-        {
-            string html = "";
-            foreach (var property in (IDictionary<String, Object>)data)
-            {
+        public override bool run(string data) {
+            string exists = FileRead();
 
-                html += "<tr>";
+            JToken json = JToken.Parse(data);
 
-                html += $"<th>{property.Key}</th>";
-
-                var type = property.Value.GetType();
-
-                var value = "";
-                if (type.Name.Contains("List"))
-                { // List or Array
-                    value = "<table border=1><tr>";
-
-                    foreach (var item in (List<Object>)property.Value)
-                    {
-
-                        var typeValue = item.GetType();
-                        var htmll = "";
-
-                        if (typeValue.Name.Contains("ExpandoObject"))
-                        {
-
-
-                            htmll = "<table border=1>";
-
-                            foreach (var property1 in (IDictionary<String, Object>)item)
-                            {
-
-                                htmll += $"<tr><th>{property1.Key}</th><td>{property1.Value}</td></tr>";
-
-                            }
-
-                            htmll += "</table>";
-
-                        }
-                        else
-                        {
-                            htmll = item + "";
-                        }
-
-                        value += $"<td>{htmll}</td>";
-
-                    }
-
-                    value += "</tr></table>";
-
-                }
-                else
-                {
-                    value = property.Value.ToString();
-                }
-
-                html += $"<td>{value}</td>";
-
-                html += "</tr>";
-
+            dynamic output;
+            if (json.Type == JTokenType.Array) {
+                output = JsonConvert.DeserializeObject<List<ExpandoObject>>(json.ToString());
+            } else if (json.Type == JTokenType.Object) {
+                output = JsonConvert.DeserializeObject<ExpandoObject>(json.ToString());
+            } else {
+                throw new NotSupportedException("Json output not suported!!");
             }
 
+            string file = HTML(output, exists);
+
+            try {
+                File.WriteAllText(Path, file);
+                return true;
+
+            } catch (Exception e) {
+                throw e;
+            }
         }
 
-        public void output(dynamic data)
-        {
-            string html = HTML(data);
+        private string FileRead() {
+            string read = null;
 
-            File.WriteAllText(@"C:\Users\NoMercy\Documents\test.html", html);
+            if (!Overwrite && File.Exists(Path)) {
+                read += ReadFile();
+            }
+            return read;
         }
 
-        private string HTML(dynamic data)
-        {
+        private string ReadFile() {
+            string text = System.IO.File.ReadAllText(Path);
+            text = text.Replace("<html><body>", string.Empty).Replace("</body></html>", string.Empty);
+            return text;
+        }
+
+        private string HTML(dynamic data, string exists) {
             string html = BASE_HTML_INIT;
 
-            html += Decider(data);
+            html += exists;
+
+            html += Decider(data, true);
 
             html += BASE_HTML_END;
 
             return html;
         }
 
-        public override bool run(dynamic data) {
-            return true;
-        }
-
-        private string Decider(dynamic data)
-        {
+        private string Decider(dynamic data, bool isFirst) {
             string html = "";
 
             dynamic name = data.GetType().Name;
             dynamic fullName = data.GetType().FullName;
 
-            if (isListOrExpando(data))
-            {
-                
-                if (name.Contains("ExpandoObject"))
-                {
+            if (isListOrExpando(data)) {
+
+                if (name.Contains("ExpandoObject")) {
                     html += "<table border=1>";
-                    foreach (var property in (IDictionary<String, Object>)data)
-                    {
-                        html += Decider(property);
+                    foreach (var property in (IDictionary<String, Object>)data) {
+                        html += Decider(property, false);
                     }
                     html += "</table>";
-                }
-                else if (name.Contains("List") && fullName.Contains("ExpandoObject"))
-                {
-                    foreach (var item in (List<ExpandoObject>)data)
-                    {
-                        html += Decider(item);
+                } else if (name.Contains("List") && fullName.Contains("ExpandoObject")) {
+                    if(isFirst)
+                        html += "<table border=1><td>";
+                    foreach (var item in (List<ExpandoObject>)data) {
+                        html += Decider(item,false);
                     }
-                }
-                else if (name.Contains("List"))
-                {
-                    foreach (var item in (List<Object>)data)
-                    {
-                        html += "<td>" + Decider(item) + "</td>";
+                    if (isFirst)
+                        html += "</td></table>";
+                } else if (name.Contains("List")) {
+                    if (isFirst)
+                        html += "<table border=1><td>";
+                    foreach (var item in (List<Object>)data) {
+                        html += "<td>" + Decider(item, false) + "</td>";
                     }
-                }
-                else
-                {
+                    if (isFirst)
+                        html += "</td></table>";
+                } else {
                     throw new Exception("Error");
                 }
-            }
-            else if (name.Contains("KeyValuePair"))
-            {
+            } else if (name.Contains("KeyValuePair")) {
                 html += $"<tr><th>{data.Key}</th>";
-                if (data.Value.GetType().Name.Contains("List"))
-                {
-                    html += Decider(data.Value);
+                if (data.Value.GetType().Name.Contains("List")) {
+                    html += Decider(data.Value, false);
+                } else {
+                    html += "<td>" + Decider(data.Value, false) + "</td>";
                 }
-                else
-                {
-                    html += "<td>" + Decider(data.Value) + "</td>";
-                }
-                
+
 
                 html += "</tr>";
-            }
-            else if(data != null)
-            {
+            } else if (data != null) {
                 html += $"{data}";
             }
-            
+
             return html;
         }
 
-        private bool isListOrExpando(dynamic data)
-        {
+        private bool isListOrExpando(dynamic data) {
             dynamic name = data.GetType().Name;
             return (name.Contains("List") || name.Contains("ExpandoObject"));
         }

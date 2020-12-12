@@ -1,6 +1,6 @@
 ﻿
 namespace DataSourcesConverter.Components.Inputs.XmlFile {
-    partial class FormXmlFile {
+    partial class FormXmlFileInput {
         /// <summary>
         /// Required designer variable.
         /// </summary>

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DataSourcesConverter.Components.Inputs.XmlFile {
-    public partial class FormXmlFile : Form {
+    public partial class FormXmlFileInput : Form {
 
-        XmlFile xmlFile;
+        XmlFileInput xmlFile;
         
-        public FormXmlFile(XmlFile file) {
+        public FormXmlFileInput(XmlFileInput file) {
             InitializeComponent();
             xmlFile = file;
             tbFilePath.Text = xmlFile.filePath;

@@ -32,7 +32,7 @@ namespace DataSourcesConverter {
             InitializeComponent();
         }
 
-        
+
 
         private void FormHome_Load(object sender, EventArgs e) {
             addEmptyTile();
@@ -59,52 +59,17 @@ namespace DataSourcesConverter {
                     selected = flows[id].Output.Type;
                 }
 
+                Object output = flows[id].Output;
                 if (selected == OutputType.HtmlFile) {
-                    FileHtmlOutput output;
-                    if ((FileHtmlOutput)flows[id].Output != null)
-                        output = (FileHtmlOutput)flows[id].Output;
-                    else
-                        output = new FileHtmlOutput();
-
-                    FormFileHtmlOutput form = new FormFileHtmlOutput(output);
-
-                    DialogResult result = form.ShowDialog();
-                    if (result == DialogResult.OK) {
-                        flows[id].Output = output;
-                        updateFlowsList(id);
-                    } else {
-                        continueOutput = true;
-                    }
-
-
+                    continueOutput = SetParametersFlow<FileHtmlOutput, FormFileHtmlOutput>(ref output);
                 } else if (selected == OutputType.ApiRest) {
-                    ApiRestOutput output;
-                    if ((ApiRestOutput)flows[id].Output != null)
-                        output = (ApiRestOutput)flows[id].Output;
-                    else
-                        output = new ApiRestOutput();
-
-                    FormApiRestOutput form = new FormApiRestOutput(output);
-
-                    DialogResult result = form.ShowDialog();
-                    if (result == DialogResult.OK) {
-                        flows[id].Output = output;
-                        updateFlowsList(id);
-                    } else {
-                        continueOutput = true;
-                    }
-
-
+                    continueOutput = SetParametersFlow<ApiRestOutput, FormApiRestOutput>(ref output);
                 }
-
-                /*else if (selected == OutputType.OUTRACENA) {
-                    //
-                }*/
+                flows[id].Output = (FlowOutput)output;
+                updateFlowsList(id);
 
 
             } while (continueOutput && isNew);
-
-
         }
 
         private void setInputCallback(int id) {
@@ -129,64 +94,69 @@ namespace DataSourcesConverter {
                     selected = flows[id].Input.Type;
                 }
 
+                Object input = flows[id].Input;
                 if (selected == InputType.RestApi) {
-                    ApiRest input;
-                    if ((ApiRest)flows[id].Input != null)
-                        input = (ApiRest)flows[id].Input;
-                    else
-                        input = new ApiRest();
-
-                    FormApiRestInput form = new FormApiRestInput(input);
-
-                    DialogResult result = form.ShowDialog();
-                    if (result == DialogResult.OK) {
-                        flows[id].Input = input;
-                        updateFlowsList(id);
-                    } else {
-                        continueInput = true;
-                    }
-
-
+                    continueInput = SetParametersFlow<ApiRestInput, FormApiRestInput>(ref input);
                 } else if (selected == InputType.XmlFile) {
-                    XmlFileInput input;
-                    if ((XmlFileInput)flows[id].Input != null)
-                        input = (XmlFileInput)flows[id].Input;
-                    else
-                        input = new XmlFileInput();
-
-                    FormXmlFileInput form = new FormXmlFileInput(input);
-
-                    DialogResult result = form.ShowDialog();
-                    if (result == DialogResult.OK) {
-                        flows[id].Input = input;
-                        updateFlowsList(id);
-                    } else {
-                        continueInput = true;
-                    }
+                    continueInput = SetParametersFlow<XmlFileInput, FormXmlFileInput>(ref input);
                 } else if (selected == InputType.Broker) {
-                    BrokerInput input;
-                    if ((BrokerInput)flows[id].Input != null)
-                        input = (BrokerInput)flows[id].Input;
-                    else
-                        input = new BrokerInput();
-
-                    FormBrokerInput form = new FormBrokerInput(input);
-
-                    DialogResult result = form.ShowDialog();
-                    if (result == DialogResult.OK) {
-                        flows[id].Input = input;
-                        updateFlowsList(id);
-                    } else {
-                        continueInput = true;
-                    }
+                    continueInput = SetParametersFlow<BrokerInput, FormBrokerInput>(ref input);
                 }
+                flows[id].Input = (FlowInput)input;
+                updateFlowsList(id);
 
             } while (continueInput && isNew);
-            
+
+        }
+
+        /// <summary>
+        /// A função é utilizada para definir os parâmetros de cada Input/Output.
+        /// A razão pelo qual ser tão complexa, e tão pouco legível, é porque é genérica 
+        /// a ponto de permitir definir os campos tanto do Input como do Output. Sendo que existem 
+        /// vários tipos de Input (ApiRest, Broker, XmlFile) e vários tipos de Output (ApiRest, FileHtml)
+        /// Para tal foi preciso usar métodos genéricos para inicializar ou converter variáveis
+        /// </summary>
+        /// <typeparam name="CompType">Tipo do Componente</typeparam>
+        /// <typeparam name="CompForm">Formulário para editar Componente</typeparam>
+        /// <param name="oldObject">O objeto antigo para poder editar</param>
+        /// <returns></returns>
+        private bool SetParametersFlow<CompType, CompForm>(ref Object oldObject) {
+            Object newObject; // XmlFileInput input;
+            if (oldObject != null)
+                newObject = Convert.ChangeType(oldObject, typeof(CompType)); // input = (XmlFileInput)flows[id].Input;
+            else
+                newObject = Activator.CreateInstance(typeof(CompType)); // input = new XmlFileInput();
+
+            dynamic form = Activator.CreateInstance(typeof(CompForm), newObject); // FormXmlFileInput form = new FormXmlFileInput(input);
+
+            DialogResult result = form.ShowDialog();
+            if (result == DialogResult.OK) {
+                oldObject = newObject;
+            } else {
+                return true;
+            }
+            return false;
+
+            #region Código exemplo completo sem casts ou instanciar objectos
+            /*ApiRestInput input;
+            if ((ApiRestInput)flows[id].Input != null)
+                input = (ApiRestInput)flows[id].Input;
+            else
+                input = new ApiRestInput();
+
+            FormApiRestInput form = new FormApiRestInput(input);
+
+            DialogResult result = form.ShowDialog();
+            if (result == DialogResult.OK) {
+                flows[id].Input = input;
+            } else {
+                continueInput = true;
+            }*/
+            #endregion
         }
 
         private void runCallback(int id) {
-            if(flows.ContainsKey(id)) {
+            if (flows.ContainsKey(id)) {
                 Flow flow = flows[id];
                 flow.Input.run((data) => { flow.Output.run(data); });
                 if (flow.Input.Type == InputType.Broker) {
@@ -196,12 +166,12 @@ namespace DataSourcesConverter {
         }
 
         private void deleteCallback(int id) {
-            if(MessageBox.Show("Tem a certeza que prentende apagar este flow?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+            if (MessageBox.Show("Tem a certeza que prentende apagar este flow?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes) {
                 updateFlowsList(id, true);
                 flows.Remove(id);
                 tilesItemViews.Remove(id);
             }
-            
+
         }
 
         private void updateFlowsList(int id, bool setToDelete = false) {
@@ -213,7 +183,7 @@ namespace DataSourcesConverter {
                 tile.updateFlow();
             }
 
-            
+
 
             bool needsToAddAnEmptyTile = true; // se todos os tiles já tiverem com input preenchidos
             foreach (var item in tilesItemViews.Values) {
@@ -221,7 +191,7 @@ namespace DataSourcesConverter {
                     needsToAddAnEmptyTile = false;
             }
 
-            if(needsToAddAnEmptyTile) {
+            if (needsToAddAnEmptyTile) {
                 addEmptyTile();
             }
 
@@ -238,6 +208,8 @@ namespace DataSourcesConverter {
 
             flowLayoutPanel1_SizeChanged(null, null);
         }
+
+
 
         private void flowLayoutPanel1_SizeChanged(object sender, EventArgs e) {
             panelFirstItemFlowLayout.Size = new Size(flowsPanel.Size.Width - (flowsPanel.VerticalScroll.Visible ? SystemInformation.VerticalScrollBarWidth : 0) - 5, 1);

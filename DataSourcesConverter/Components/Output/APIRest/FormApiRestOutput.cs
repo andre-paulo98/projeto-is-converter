@@ -19,18 +19,18 @@ namespace DataSourcesConverter.Components.Output.APIRest
             InitializeComponent();
             output = api;
             tbName.Text = output.Name;
-            tb_url.Text = "https://jsonplaceholder.typicode.com/posts"; // output.url;
+            tb_url.Text = output.url;
             cbMethod.SelectedIndex = 1;
         }
 
-        private void bt_cancel_Click(object sender, EventArgs e) {
-            DialogResult = DialogResult.Cancel;
+        private void btSave_Click(object sender, EventArgs e) {
+            output.Name = tbName.Text;
+            DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void bt_save_Click(object sender, EventArgs e) {
-            output.Name = tbName.Text;
-            DialogResult = DialogResult.OK;
+        private void btCancel_Click(object sender, EventArgs e) {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
     }

@@ -53,8 +53,7 @@ namespace DataSourcesConverter.Components.Output.FileHtml {
 
         private string ReadFile() {
             string text = System.IO.File.ReadAllText(Path);
-            text.Replace("<html><body>", string.Empty);
-            text.Replace("</body></html>", string.Empty);
+            text = text.Replace("<html><body>", string.Empty).Replace("</body></html>", string.Empty);
             return text;
         }
 
@@ -63,14 +62,14 @@ namespace DataSourcesConverter.Components.Output.FileHtml {
 
             html += exists;
 
-            html += Decider(data);
+            html += Decider(data, true);
 
             html += BASE_HTML_END;
 
             return html;
         }
 
-        private string Decider(dynamic data) {
+        private string Decider(dynamic data, bool isFirst) {
             string html = "";
 
             dynamic name = data.GetType().Name;
@@ -81,26 +80,34 @@ namespace DataSourcesConverter.Components.Output.FileHtml {
                 if (name.Contains("ExpandoObject")) {
                     html += "<table border=1>";
                     foreach (var property in (IDictionary<String, Object>)data) {
-                        html += Decider(property);
+                        html += Decider(property, false);
                     }
                     html += "</table>";
                 } else if (name.Contains("List") && fullName.Contains("ExpandoObject")) {
+                    if(isFirst)
+                        html += "<table border=1><td>";
                     foreach (var item in (List<ExpandoObject>)data) {
-                        html += Decider(item);
+                        html += Decider(item,false);
                     }
+                    if (isFirst)
+                        html += "</td></table>";
                 } else if (name.Contains("List")) {
+                    if (isFirst)
+                        html += "<table border=1><td>";
                     foreach (var item in (List<Object>)data) {
-                        html += "<td>" + Decider(item) + "</td>";
+                        html += "<td>" + Decider(item, false) + "</td>";
                     }
+                    if (isFirst)
+                        html += "</td></table>";
                 } else {
                     throw new Exception("Error");
                 }
             } else if (name.Contains("KeyValuePair")) {
                 html += $"<tr><th>{data.Key}</th>";
                 if (data.Value.GetType().Name.Contains("List")) {
-                    html += Decider(data.Value);
+                    html += Decider(data.Value, false);
                 } else {
-                    html += "<td>" + Decider(data.Value) + "</td>";
+                    html += "<td>" + Decider(data.Value, false) + "</td>";
                 }
 
 

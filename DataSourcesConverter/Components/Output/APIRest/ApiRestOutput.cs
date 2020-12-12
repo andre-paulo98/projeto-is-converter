@@ -35,9 +35,9 @@ namespace DataSourcesConverter.Components.Output.APIRest
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
 
             return false;

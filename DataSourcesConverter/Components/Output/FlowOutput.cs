@@ -13,6 +13,7 @@ namespace DataSourcesConverter.Components.Output {
 
     }
     public enum OutputType {
-        HtmlFile
+        HtmlFile,
+        ApiRest
     }
 }

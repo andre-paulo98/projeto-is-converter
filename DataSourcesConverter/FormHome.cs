@@ -148,7 +148,10 @@ namespace DataSourcesConverter {
         }
 
         private void runCallback(int id) {
-            throw new NotImplementedException();
+            if(flows.ContainsKey(id)) {
+                Flow flow = flows[id];
+                flow.Input.run((data) => { flow.Output.run(data); });
+            }
         }
 
         private void deleteCallback(int id) {

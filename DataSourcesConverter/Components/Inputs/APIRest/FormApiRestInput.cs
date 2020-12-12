@@ -29,7 +29,7 @@ namespace DataSourcesConverter.Components.Inputs.APIRest
             {
                 output.url = tb_url.Text;
                 output.method = cbMethod.Text;
-                rtb_result.Text = output.run();
+                rtb_result.Text = output.getResponse();
                                 
                 bt_save.Enabled = true;
             }

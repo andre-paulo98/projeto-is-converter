@@ -13,7 +13,12 @@ namespace DataSourcesConverter.Components.Inputs.APIRest {
         public string url { get; set; }
         public string method { get; set; }
 
-        public override string run() {
+        public override void run(ReceiveCallback callback) {
+            string response = getResponse();
+            callback(response);
+        }
+
+        public string getResponse() {
             string json = null;
             try {
                 HttpWebRequest request = WebRequest.CreateHttp(url);

@@ -17,14 +17,18 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
         }
 
         public override void run(ReceiveCallback callback) {
+            Logger.Instance.info(Type.ToString(), "Ler ficheiro xml");
             string response = getResponse();
             callback(response);
+            Logger.Instance.info(Type.ToString(), "Ler ficheiro xml -- Concluido");
         }
 
         public string getResponse() {
             try {
+                Logger.Instance.status(Type.ToString(), "A abrir ficheiro...");
                 XmlDocument doc = new XmlDocument();
                 doc.Load(path);
+                Logger.Instance.status(Type.ToString(), "A processar ficheir...");
                 return JsonConvert.SerializeXmlNode(doc.DocumentElement,Newtonsoft.Json.Formatting.Indented).Replace("@","");
             } catch (Exception) {
                 throw;

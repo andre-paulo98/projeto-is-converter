@@ -33,8 +33,15 @@ namespace DataSourcesConverter {
             this.exportarXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.executarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adicionarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rtbLog = new System.Windows.Forms.RichTextBox();
+            this.btClearLog = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.flowsPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowsPanel
@@ -43,9 +50,9 @@ namespace DataSourcesConverter {
             this.flowsPanel.Controls.Add(this.panelFirstItemFlowLayout);
             this.flowsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowsPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowsPanel.Location = new System.Drawing.Point(0, 24);
+            this.flowsPanel.Location = new System.Drawing.Point(0, 0);
             this.flowsPanel.Name = "flowsPanel";
-            this.flowsPanel.Size = new System.Drawing.Size(944, 462);
+            this.flowsPanel.Size = new System.Drawing.Size(700, 462);
             this.flowsPanel.TabIndex = 0;
             this.flowsPanel.WrapContents = false;
             this.flowsPanel.SizeChanged += new System.EventHandler(this.flowLayoutPanel1_SizeChanged);
@@ -67,7 +74,7 @@ namespace DataSourcesConverter {
             this.adicionarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(944, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1064, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -83,14 +90,14 @@ namespace DataSourcesConverter {
             // importarXMLToolStripMenuItem
             // 
             this.importarXMLToolStripMenuItem.Name = "importarXMLToolStripMenuItem";
-            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.importarXMLToolStripMenuItem.Text = "Importar XML";
             this.importarXMLToolStripMenuItem.Click += new System.EventHandler(this.importarXMLToolStripMenuItem_Click);
             // 
             // exportarXMLToolStripMenuItem
             // 
             this.exportarXMLToolStripMenuItem.Name = "exportarXMLToolStripMenuItem";
-            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.exportarXMLToolStripMenuItem.Text = "Exportar XML";
             this.exportarXMLToolStripMenuItem.Click += new System.EventHandler(this.exportarXMLToolStripMenuItem_Click);
             // 
@@ -108,12 +115,54 @@ namespace DataSourcesConverter {
             this.adicionarToolStripMenuItem.Text = "Adicionar";
             this.adicionarToolStripMenuItem.Click += new System.EventHandler(this.adicionarToolStripMenuItem_Click);
             // 
+            // rtbLog
+            // 
+            this.rtbLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.rtbLog.Location = new System.Drawing.Point(3, 3);
+            this.rtbLog.Name = "rtbLog";
+            this.rtbLog.Size = new System.Drawing.Size(353, 422);
+            this.rtbLog.TabIndex = 2;
+            this.rtbLog.Text = "";
+            // 
+            // btClearLog
+            // 
+            this.btClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btClearLog.Location = new System.Drawing.Point(233, 431);
+            this.btClearLog.Name = "btClearLog";
+            this.btClearLog.Size = new System.Drawing.Size(123, 28);
+            this.btClearLog.TabIndex = 3;
+            this.btClearLog.Text = "Clear Log";
+            this.btClearLog.UseVisualStyleBackColor = true;
+            this.btClearLog.Click += new System.EventHandler(this.btClearLog_Click);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.flowsPanel);
+            this.splitContainer1.Panel1MinSize = 700;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.rtbLog);
+            this.splitContainer1.Panel2.Controls.Add(this.btClearLog);
+            this.splitContainer1.Size = new System.Drawing.Size(1064, 462);
+            this.splitContainer1.SplitterDistance = 700;
+            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.TabIndex = 4;
+            // 
             // FormHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(944, 486);
-            this.Controls.Add(this.flowsPanel);
+            this.ClientSize = new System.Drawing.Size(1064, 486);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -121,10 +170,15 @@ namespace DataSourcesConverter {
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormHome";
             this.Text = "Converter";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormHome_FormClosing);
             this.Load += new System.EventHandler(this.FormHome_Load);
             this.flowsPanel.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,6 +194,9 @@ namespace DataSourcesConverter {
         private System.Windows.Forms.ToolStripMenuItem exportarXMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem executarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adicionarToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox rtbLog;
+        private System.Windows.Forms.Button btClearLog;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 

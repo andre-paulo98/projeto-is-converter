@@ -12,6 +12,8 @@ namespace DataSourcesConverter.Components.Inputs
         public InputType Type { get; protected set; }
         public string Name { get; set; }
         public abstract void run(ReceiveCallback callback);
+
+
     }
 
     public delegate void ReceiveCallback(string data);

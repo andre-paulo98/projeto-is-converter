@@ -30,6 +30,7 @@ namespace DataSourcesConverter {
 
         public FormHome() {
             InitializeComponent();
+            Logger.Instance.callback = log;
         }
 
 
@@ -158,10 +159,14 @@ namespace DataSourcesConverter {
         private void runCallback(int id) {
             if (flows.ContainsKey(id)) {
                 Flow flow = flows[id];
-                flow.Input.run((data) => { flow.Output.run(data); });
+                flow.Input.run((data) => {
+                    flow.Output.run(data);
+                });
+                Logger.Instance.info("MAIN", "Alterar botão");
                 if (flow.Input.Type == InputType.Broker) {
                     updateFlowsList(id);
                 }
+
             }
         }
 
@@ -229,6 +234,46 @@ namespace DataSourcesConverter {
 
         private void adicionarToolStripMenuItem_Click(object sender, EventArgs e) {
             addEmptyTile();
+        }
+
+
+
+        private void log(string level, string line) {
+            level = level.ToUpper();
+            string text = "";
+
+            if (level.Equals("STATUS")) {
+                text = $"\t {line}";
+            } else {
+                text = $"[{level}] {line}";
+            }
+
+            rtbLog.Invoke(new Action(() => {
+                int start = rtbLog.Text.Length;
+                rtbLog.AppendText(text);
+                rtbLog.Select(start, rtbLog.Text.Length);
+
+                switch (level) {
+                    case "ERROR":
+                        rtbLog.SelectionColor = Color.Red;
+                        break;
+                    case "SUCCESS":
+                        rtbLog.SelectionColor = Color.Green;
+                        break;
+                    case "INFO":
+                        rtbLog.SelectionColor = Color.Blue;
+                        break;
+                }
+                rtbLog.ScrollToCaret();
+            }));
+        }
+
+        private void FormHome_FormClosing(object sender, FormClosingEventArgs e) {
+            //TODO Fechar conecção do broker 
+        }
+
+        private void btClearLog_Click(object sender, EventArgs e) {
+            rtbLog.Text = "";
         }
     }
 }

@@ -16,20 +16,22 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
         public FormXmlFileInput(XmlFileInput file) {
             InitializeComponent();
             xmlFile = file;
-            tbFilePath.Text = xmlFile.filePath;
+            tbName.Text = xmlFile.Name;
+            tbFilePath.Text = xmlFile.path;
         }
 
         private void btChooseFile_Click(object sender, EventArgs e) {
             if (openFileDialog.ShowDialog(this) == DialogResult.OK) {
-                xmlFile.filePath = openFileDialog.FileName;
-                tbFilePath.Text = xmlFile.filePath;
+                xmlFile.path = openFileDialog.FileName;
+                tbFilePath.Text = xmlFile.path;
                 rtbResult.Text = xmlFile.getResponse();
                 btSave.Enabled = true;
             }
         }
 
         private void btSave_Click(object sender, EventArgs e) {
-            xmlFile.filePath = tbFilePath.Text;
+            xmlFile.path = tbFilePath.Text;
+            xmlFile.Name = tbName.Text;
 
             DialogResult = DialogResult.OK;
             Close();

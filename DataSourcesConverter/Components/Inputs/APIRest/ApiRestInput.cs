@@ -9,11 +9,11 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 
 namespace DataSourcesConverter.Components.Inputs.APIRest {
-    public class ApiRest : FlowInput {
+    public class ApiRestInput : FlowInput {
         public string url { get; set; }
         public string method { get; set; }
 
-        public ApiRest() {
+        public ApiRestInput() {
             Type = InputType.RestApi;
         }
 

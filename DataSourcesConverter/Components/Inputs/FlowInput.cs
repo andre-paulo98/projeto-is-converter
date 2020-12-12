@@ -19,7 +19,7 @@ namespace DataSourcesConverter.Components.Inputs
 
     public enum InputType
     {
-        RestApi,
+        RestApi, // TODO trocar para ApiRest e adicionar Input
         XmlFile,
         Broker,
         Excel,

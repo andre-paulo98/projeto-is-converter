@@ -6,9 +6,9 @@ namespace DataSourcesConverter.Components.Inputs.APIRest
 {
     public partial class FormApiRestInput : Form
     {
-        private ApiRest output;
+        private ApiRestInput output;
 
-        public FormApiRestInput(ApiRest api)
+        public FormApiRestInput(ApiRestInput api)
         {
             InitializeComponent();
             output = api;

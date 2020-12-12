@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace DataSourcesConverter.Components.Inputs.XmlFile {
     public class XmlFileInput : FlowInput {
-        public string filePath { get; set; }
+        public string path { get; set; }
         XmlDocument dom;
 
         public XmlFileInput() {
@@ -24,7 +24,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
         public string getResponse() {
             try {
                 XmlDocument doc = new XmlDocument();
-                doc.Load(filePath);
+                doc.Load(path);
                 return JsonConvert.SerializeXmlNode(doc.DocumentElement,Newtonsoft.Json.Formatting.Indented).Replace("@","");
             } catch (Exception) {
                 throw;

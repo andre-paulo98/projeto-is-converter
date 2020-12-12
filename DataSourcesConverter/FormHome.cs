@@ -1,7 +1,9 @@
 ﻿using DataSourcesConverter.Components;
 using DataSourcesConverter.Components.Inputs;
 using DataSourcesConverter.Components.Inputs.APIRest;
-using DataSourcesConverter.Components.Output.FileHtmlOutput;
+using DataSourcesConverter.Components.Inputs.XmlFile;
+using DataSourcesConverter.Components.Output;
+using DataSourcesConverter.Components.Output.FileHtml;
 using DataSourcesConverter.teste;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -31,67 +33,189 @@ namespace DataSourcesConverter {
         
 
         private void FormHome_Load(object sender, EventArgs e) {
-
-            Flow flow = new Flow() { ID = NEXT_ID++, Input = null, Output = null };
-            flows.Add(flow.ID, flow);
-
-            TilesItemView tile = new TilesItemView(flow, runCallback, setInputCallback, setOutputCallback);
-            tilesItemViews.Add(flow.ID, tile);
-
-
-            flowsPanel.Controls.Add(tile);
-            flowLayoutPanel1_SizeChanged(null, null);
-
-
+            addEmptyTile();
         }
 
         private void setOutputCallback(int id) {
-            throw new NotImplementedException();
+            bool continueOutput;
+            bool isNew = false;
+
+            do {
+                continueOutput = false;
+
+                OutputType selected;
+
+                if (flows[id].Output == null) {
+                    FormSelectType select = new FormSelectType(false);
+                    DialogResult result = select.ShowDialog();
+                    if (result != DialogResult.OK) {
+                        return;
+                    }
+                    selected = select.OutputTypeSelected.Value;
+                    isNew = true;
+                } else {
+                    selected = flows[id].Output.Type;
+                }
+
+                if (selected == OutputType.HtmlFile) {
+                    FileHtmlOutput output;
+                    if ((FileHtmlOutput)flows[id].Output != null)
+                        output = (FileHtmlOutput)flows[id].Output;
+                    else
+                        output = new FileHtmlOutput();
+
+                    FormFileHtmlOutput form = new FormFileHtmlOutput(output);
+
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.OK) {
+                        flows[id].Output = output;
+                        updateFlowsList(id);
+                    } else {
+                        continueOutput = true;
+                    }
+
+
+                } /*else if (selected == OutputType.OUTRACENA) {
+                    //
+                }*/
+
+
+            } while (continueOutput && isNew);
+
+
         }
 
         private void setInputCallback(int id) {
 
-            InputType selected;
-            if(flows[id].Input == null) {
-                FormSelectType select = new FormSelectType(true);
-                select.ShowDialog(); // TODO check if result was ok
-                selected = select.InputTypeSelected.Value;
-            } else {
-                selected = flows[id].Input.Type;
-            }
+            bool continueInput;
+            bool isNew = false;
 
-            if (selected == InputType.RestApi) {
-                ApiRest input;
-                if ((ApiRest)flows[id].Input != null)
-                    input = (ApiRest)flows[id].Input;
-                else
-                    input = new ApiRest();
+            do {
 
-                FormApiRestInput form = new FormApiRestInput(input);
-                form.ShowDialog();
+                continueInput = false;
 
-                flows[id].Input = input;
-                updateFlowsList(id);
+                InputType selected;
+                if (flows[id].Input == null) {
+                    FormSelectType select = new FormSelectType(true);
+                    DialogResult result = select.ShowDialog();
+                    if (result != DialogResult.OK) {
+                        return;
+                    }
+                    selected = select.InputTypeSelected.Value;
+                    isNew = true;
+                } else {
+                    selected = flows[id].Input.Type;
+                }
 
-            } else if (selected == InputType.XmlFile) {
-                //
-            }
+                if (selected == InputType.RestApi) {
+                    ApiRest input;
+                    if ((ApiRest)flows[id].Input != null)
+                        input = (ApiRest)flows[id].Input;
+                    else
+                        input = new ApiRest();
+
+                    FormApiRestInput form = new FormApiRestInput(input);
+
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.OK) {
+                        flows[id].Input = input;
+                        updateFlowsList(id);
+                    } else {
+                        continueInput = true;
+                    }
+
+
+                } else if (selected == InputType.XmlFile) {
+                    XmlFile input;
+                    if ((XmlFile)flows[id].Input != null)
+                        input = (XmlFile)flows[id].Input;
+                    else
+                        input = new XmlFile();
+
+                    FormXmlFile form = new FormXmlFile(input);
+
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.OK) {
+                        flows[id].Input = input;
+                        updateFlowsList(id);
+                    } else {
+                        continueInput = true;
+                    }
+                }
+
+            } while (continueInput && isNew);
+            
         }
 
         private void runCallback(int id) {
-            throw new NotImplementedException();
+            if(flows.ContainsKey(id)) {
+                Flow flow = flows[id];
+                flow.Input.run((data) => { flow.Output.run(data); });
+            }
         }
 
-        private void updateFlowsList(int id) {
+        private void deleteCallback(int id) {
+            if(MessageBox.Show("Tem a certeza que prentende apagar este flow?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                updateFlowsList(id, true);
+                flows.Remove(id);
+                tilesItemViews.Remove(id);
+            }
+            
+        }
+
+        private void updateFlowsList(int id, bool setToDelete = false) {
             TilesItemView tile = tilesItemViews[id];
-            if(tile != null) {
+            if (setToDelete) {
+                flowsPanel.Controls.Remove(tile);
+
+            } else if (tile != null) {
                 tile.updateFlow();
             }
 
+            
+
+            bool needsToAddAnEmptyTile = true; // se todos os tiles já tiverem com input preenchidos
+            foreach (var item in tilesItemViews.Values) {
+                if (item.Flow.Input == null)
+                    needsToAddAnEmptyTile = false;
+            }
+
+            if(needsToAddAnEmptyTile) {
+                addEmptyTile();
+            }
+
+        }
+
+        private void addEmptyTile() {
+            Flow flow = new Flow() { ID = NEXT_ID++, Input = null, Output = null };
+            flows.Add(flow.ID, flow);
+
+            TilesItemView tile = new TilesItemView(flow, runCallback, setInputCallback, setOutputCallback, deleteCallback);
+            tilesItemViews.Add(flow.ID, tile);
+
+            flowsPanel.Controls.Add(tile);
+
+            flowLayoutPanel1_SizeChanged(null, null);
         }
 
         private void flowLayoutPanel1_SizeChanged(object sender, EventArgs e) {
             panelFirstItemFlowLayout.Size = new Size(flowsPanel.Size.Width - (flowsPanel.VerticalScroll.Visible ? SystemInformation.VerticalScrollBarWidth : 0) - 5, 1);
+        }
+
+        private void importarXMLToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void exportarXMLToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void executarToolStripMenuItem_Click(object sender, EventArgs e) {
+
+        }
+
+        private void adicionarToolStripMenuItem_Click(object sender, EventArgs e) {
+            addEmptyTile();
         }
     }
 }

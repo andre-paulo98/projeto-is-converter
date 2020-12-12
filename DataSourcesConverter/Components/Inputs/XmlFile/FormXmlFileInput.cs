@@ -23,7 +23,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             if (openFileDialog.ShowDialog(this) == DialogResult.OK) {
                 xmlFile.filePath = openFileDialog.FileName;
                 tbFilePath.Text = xmlFile.filePath;
-                rtbResult.Text = xmlFile.run();
+                rtbResult.Text = xmlFile.getResponse();
                 btSave.Enabled = true;
             }
         }

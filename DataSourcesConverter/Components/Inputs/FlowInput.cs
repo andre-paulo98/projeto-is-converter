@@ -11,10 +11,12 @@ namespace DataSourcesConverter.Components.Inputs
     {
         public InputType Type { get; }
         public string Name { get; set; }
-
-        public abstract string run();
-        
+        public abstract void run(ReceiveCallback callback);
     }
+
+    public delegate void ReceiveCallback(string data);
+
+
     public enum InputType
     {
         RestApi,

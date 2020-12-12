@@ -39,6 +39,8 @@ namespace DataSourcesConverter.Components {
                 OutputTypeSelected = (OutputType)Enum.Parse(typeof(OutputType), cbTypes.SelectedItem.ToString());
             }
 
+            DialogResult = DialogResult.OK;
+
             Close();
         }
     }

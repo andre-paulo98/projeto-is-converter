@@ -15,7 +15,12 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             dom = new XmlDocument();
         }
 
-        public override string run() {
+        public override void run(ReceiveCallback callback) {
+            string response = getResponse();
+            callback(response);
+        }
+
+        public string getResponse() {
             try {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(filePath);

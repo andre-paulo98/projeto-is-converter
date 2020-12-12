@@ -1,5 +1,5 @@
 ﻿
-namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
+namespace DataSourcesConverter.Components.Output.FileHtml {
     partial class FormFileHtmlOutput {
         /// <summary>
         /// Required designer variable.
@@ -26,13 +26,15 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFileHtmlOutput));
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbPath = new System.Windows.Forms.TextBox();
             this.btSave = new System.Windows.Forms.Button();
             this.btOpenFileDialog = new System.Windows.Forms.Button();
             this.btCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.cbNewFile = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,15 +48,15 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             this.label1.TabIndex = 0;
             this.label1.Text = "Nome:";
             // 
-            // textBox1
+            // tbName
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(76, 6);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(262, 26);
-            this.textBox1.TabIndex = 1;
+            this.tbName.Location = new System.Drawing.Point(76, 6);
+            this.tbName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(175, 26);
+            this.tbName.TabIndex = 1;
             // 
             // label2
             // 
@@ -66,20 +68,21 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             this.label2.TabIndex = 2;
             this.label2.Text = "Caminho:";
             // 
-            // textBox2
+            // tbPath
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(97, 42);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(205, 26);
-            this.textBox2.TabIndex = 3;
+            this.tbPath.Enabled = false;
+            this.tbPath.Location = new System.Drawing.Point(104, 42);
+            this.tbPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbPath.Name = "tbPath";
+            this.tbPath.Size = new System.Drawing.Size(260, 26);
+            this.tbPath.TabIndex = 3;
             // 
             // btSave
             // 
             this.btSave.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btSave.Location = new System.Drawing.Point(167, 5);
+            this.btSave.Location = new System.Drawing.Point(202, 5);
             this.btSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(112, 35);
@@ -91,9 +94,9 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             // btOpenFileDialog
             // 
             this.btOpenFileDialog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btOpenFileDialog.Location = new System.Drawing.Point(309, 42);
+            this.btOpenFileDialog.Location = new System.Drawing.Point(371, 42);
             this.btOpenFileDialog.Name = "btOpenFileDialog";
-            this.btOpenFileDialog.Size = new System.Drawing.Size(30, 26);
+            this.btOpenFileDialog.Size = new System.Drawing.Size(35, 30);
             this.btOpenFileDialog.TabIndex = 5;
             this.btOpenFileDialog.Text = "...";
             this.btOpenFileDialog.UseVisualStyleBackColor = true;
@@ -102,7 +105,7 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             // btCancel
             // 
             this.btCancel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btCancel.Location = new System.Drawing.Point(46, 5);
+            this.btCancel.Location = new System.Drawing.Point(79, 5);
             this.btCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(112, 35);
@@ -127,25 +130,39 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(326, 45);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(394, 45);
             this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // cbNewFile
+            // 
+            this.cbNewFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbNewFile.AutoSize = true;
+            this.cbNewFile.Location = new System.Drawing.Point(284, 8);
+            this.cbNewFile.Name = "cbNewFile";
+            this.cbNewFile.Size = new System.Drawing.Size(124, 24);
+            this.cbNewFile.TabIndex = 9;
+            this.cbNewFile.Text = "Novo Ficheiro";
+            this.cbNewFile.UseVisualStyleBackColor = true;
+            this.cbNewFile.CheckedChanged += new System.EventHandler(this.cbNewFile_CheckedChanged);
+            this.cbNewFile.MouseHover += new System.EventHandler(this.cbNewFile_MouseHover);
             // 
             // FormFileHtmlOutput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(351, 126);
+            this.ClientSize = new System.Drawing.Size(421, 126);
+            this.Controls.Add(this.cbNewFile);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btOpenFileDialog);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.tbPath);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbName);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximumSize = new System.Drawing.Size(2000, 165);
-            this.MinimumSize = new System.Drawing.Size(282, 165);
+            this.MinimumSize = new System.Drawing.Size(437, 165);
             this.Name = "FormFileHtmlOutput";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Definir Localização de Ficheiro Output";
@@ -158,12 +175,14 @@ namespace DataSourcesConverter.Components.Output.FileHtmlOutput {
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbPath;
         private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.Button btOpenFileDialog;
         private System.Windows.Forms.Button btCancel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.CheckBox cbNewFile;
     }
 }

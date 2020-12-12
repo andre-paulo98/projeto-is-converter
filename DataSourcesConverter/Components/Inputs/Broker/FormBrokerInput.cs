@@ -17,8 +17,12 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
         public FormBrokerInput(BrokerInput brokerInput) {
             InitializeComponent();
             this.brokerInput = brokerInput;
-            topics = new BindingList<string>();
+            topics = new BindingList<string>(brokerInput.Topics);
             lboxTopics.DataSource = topics;
+            if (topics.Count > 0)
+                gbListTopics.Enabled = true;
+            tbName.Text = brokerInput.Name;
+            tbHost.Text = brokerInput.Host;
         }
 
         private void btConnect_Click(object sender, EventArgs e) {
@@ -50,8 +54,9 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
         private void btSave_Click(object sender, EventArgs e) {
             brokerInput.Name = tbName.Text;
             brokerInput.Host = tbHost.Text;
-            brokerInput.addTopics(topics.ToList());
+            brokerInput.Topics = topics.ToList();
             DialogResult = DialogResult.OK;
+            brokerInput.disconnect();
             Close();
         }
 

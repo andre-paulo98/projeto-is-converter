@@ -1,5 +1,6 @@
 ﻿using DataSourcesConverter.Components;
 using DataSourcesConverter.Components.Inputs;
+using DataSourcesConverter.Components.Inputs.Broker;
 using DataSourcesConverter.Components.Output;
 using System;
 using System.Collections.Generic;
@@ -82,6 +83,12 @@ namespace DataSourcesConverter.teste {
                 btDelete.Visible = false;
             } else {
                 btDelete.Visible = true;
+            }
+
+            if(Flow.Input != null && Flow.Input.Type == InputType.Broker && ((BrokerInput)Flow.Input).IsConnected) {
+                btRun.BackgroundImage = Properties.Resources.pause_button;
+            } else {
+                btRun.BackgroundImage = Properties.Resources.run_button;
             }
         }
 

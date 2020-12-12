@@ -14,9 +14,16 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
         MqttClient mClient = null;
         ReceiveCallback callback;
 
+
         public string Host { get; set; }
 
-        public List<string> Topics { get; private set; }
+        public List<string> Topics { get; set; }
+
+        public bool IsConnected {
+            get {
+                return mClient != null && mClient.IsConnected;
+            }
+        }
 
         public BrokerInput() {
             Topics = new List<string>();
@@ -24,17 +31,32 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
         }
 
         public override void run(ReceiveCallback callback) {
+            if (IsConnected) {
+                disconnect();
+                return;
+            }
             this.callback = callback;
+            connect();
+
+        }
+
+        public void disconnect() {
+            if (IsConnected) {
+                if (Topics.Count > 0)
+                    mClient.Unsubscribe(Topics.ToArray());
+                mClient.Disconnect();
+            }
         }
 
         public bool connect() {
-            if (mClient != null && mClient.IsConnected) {
-                mClient.Unsubscribe(Topics.ToArray());
-                mClient.Disconnect();
-            }
+            disconnect();
             try {
                 mClient = new MqttClient(Host);
                 mClient.Connect(Guid.NewGuid().ToString());
+
+                if (Topics.Count > 0)
+                    subscribe();
+
             } catch (Exception e) {
                 throw new Exception("Broker Input: " + e.InnerException.Message);
             }
@@ -43,19 +65,15 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
             return mClient.IsConnected;
         }
 
-        public void addTopics(List<string> newTopics) {
-            if (mClient != null && mClient.IsConnected) {
-                if(Topics.Count > 0)
-                    mClient.Unsubscribe(Topics.ToArray());
 
-                byte[] qosLevels = new byte[newTopics.Count];
-                for (int i = 0; i < newTopics.Count; i++) {
+        private void subscribe() {
+            if (IsConnected) {
+                byte[] qosLevels = new byte[Topics.Count];
+                for (int i = 0; i < Topics.Count; i++) {
                     qosLevels[i] = MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE;
                 }
 
-                mClient.Subscribe(newTopics.ToArray(), qosLevels);
-
-                Topics = newTopics;
+                mClient.Subscribe(Topics.ToArray(), qosLevels);
             }
         }
 

@@ -2,6 +2,7 @@
 using DataSourcesConverter.Components.Inputs;
 using DataSourcesConverter.Components.Inputs.APIRest;
 using DataSourcesConverter.Components.Inputs.XmlFile;
+using DataSourcesConverter.Components.Inputs.Broker;
 using DataSourcesConverter.Components.Output;
 using DataSourcesConverter.Components.Output.FileHtml;
 using DataSourcesConverter.Components.Output.APIRest;
@@ -162,6 +163,22 @@ namespace DataSourcesConverter {
                     } else {
                         continueInput = true;
                     }
+                } else if (selected == InputType.Broker) {
+                    BrokerInput input;
+                    if ((BrokerInput)flows[id].Input != null)
+                        input = (BrokerInput)flows[id].Input;
+                    else
+                        input = new BrokerInput();
+
+                    FormBrokerInput form = new FormBrokerInput(input);
+
+                    DialogResult result = form.ShowDialog();
+                    if (result == DialogResult.OK) {
+                        flows[id].Input = input;
+                        updateFlowsList(id);
+                    } else {
+                        continueInput = true;
+                    }
                 }
 
             } while (continueInput && isNew);
@@ -172,6 +189,9 @@ namespace DataSourcesConverter {
             if(flows.ContainsKey(id)) {
                 Flow flow = flows[id];
                 flow.Input.run((data) => { flow.Output.run(data); });
+                if (flow.Input.Type == InputType.Broker) {
+                    updateFlowsList(id);
+                }
             }
         }
 

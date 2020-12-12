@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBrokerInput));
             this.label1 = new System.Windows.Forms.Label();
             this.tbHost = new System.Windows.Forms.TextBox();
             this.lboxTopics = new System.Windows.Forms.ListBox();
@@ -75,7 +76,7 @@
             // 
             // btSave
             // 
-            this.btSave.Location = new System.Drawing.Point(340, 497);
+            this.btSave.Location = new System.Drawing.Point(340, 491);
             this.btSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(112, 35);
@@ -86,7 +87,7 @@
             // 
             // btCancel
             // 
-            this.btCancel.Location = new System.Drawing.Point(200, 497);
+            this.btCancel.Location = new System.Drawing.Point(200, 491);
             this.btCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(112, 35);
@@ -103,14 +104,14 @@
             this.gbListTopics.Controls.Add(this.btRemove);
             this.gbListTopics.Controls.Add(this.lboxTopics);
             this.gbListTopics.Enabled = false;
-            this.gbListTopics.Location = new System.Drawing.Point(18, 138);
+            this.gbListTopics.Location = new System.Drawing.Point(18, 132);
             this.gbListTopics.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbListTopics.Name = "gbListTopics";
             this.gbListTopics.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbListTopics.Size = new System.Drawing.Size(435, 349);
             this.gbListTopics.TabIndex = 10;
             this.gbListTopics.TabStop = false;
-            this.gbListTopics.Text = "Lista de Topicos:";
+            this.gbListTopics.Text = "Lista de Tópicos:";
             // 
             // label2
             // 
@@ -120,7 +121,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 20);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Topico:";
+            this.label2.Text = "Tópico:";
             // 
             // btAdd
             // 
@@ -170,7 +171,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 20);
             this.label3.TabIndex = 12;
-            this.label3.Text = "Name:";
+            this.label3.Text = "Nome:";
             // 
             // tbName
             // 
@@ -183,7 +184,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 538);
+            this.ClientSize = new System.Drawing.Size(474, 544);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btConnect);
@@ -193,9 +194,11 @@
             this.Controls.Add(this.tbHost);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FormBrokerInput";
-            this.Text = "FormBrokerInput";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Ler de sistema de mensagens";
             this.gbListTopics.ResumeLayout(false);
             this.gbListTopics.PerformLayout();
             this.ResumeLayout(false);

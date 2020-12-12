@@ -78,7 +78,7 @@ namespace DataSourcesConverter {
 
                 } else if (selected == OutputType.ApiRest) {
                     ApiRestOutput output;
-                    if ((FileHtmlOutput)flows[id].Output != null)
+                    if ((ApiRestOutput)flows[id].Output != null)
                         output = (ApiRestOutput)flows[id].Output;
                     else
                         output = new ApiRestOutput();

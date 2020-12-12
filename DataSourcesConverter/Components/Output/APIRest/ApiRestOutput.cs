@@ -11,7 +11,6 @@ namespace DataSourcesConverter.Components.Output.APIRest
     public class ApiRestOutput : FlowOutput{
         public string url { get; set; }
         public string method { get; set; }
-        public string data { get; set; }
 
         public override bool run(string data)
         {

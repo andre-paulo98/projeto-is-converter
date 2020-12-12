@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
@@ -17,7 +19,19 @@ namespace DataSourcesConverter.Components.Output.FileHtml {
 
         public override bool run(string data) {
             string exists = FileRead();
-            string file = HTML(data, exists);
+
+            JToken json = JToken.Parse(data);
+
+            dynamic output;
+            if (json.Type == JTokenType.Array) {
+                output = JsonConvert.DeserializeObject<List<ExpandoObject>>(json.ToString());
+            } else if (json.Type == JTokenType.Object) {
+                output = JsonConvert.DeserializeObject<ExpandoObject>(json.ToString());
+            } else {
+                throw new NotSupportedException("Json output not suported!!");
+            }
+
+            string file = HTML(output, exists);
 
             try {
                 File.WriteAllText(Path, file);

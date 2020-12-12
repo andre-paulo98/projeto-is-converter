@@ -9,7 +9,7 @@ namespace DataSourcesConverter.Components.Inputs
 {
     public abstract class FlowInput
     {
-        public InputType Type { get; }
+        public InputType Type { get; protected set; }
         public string Name { get; set; }
         public abstract void run(ReceiveCallback callback);
     }

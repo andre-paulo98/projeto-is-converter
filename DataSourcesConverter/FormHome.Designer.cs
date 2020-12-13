@@ -36,6 +36,7 @@ namespace DataSourcesConverter {
             this.rtbLog = new System.Windows.Forms.RichTextBox();
             this.btClearLog = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.flowsPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -90,15 +91,15 @@ namespace DataSourcesConverter {
             // importarXMLToolStripMenuItem
             // 
             this.importarXMLToolStripMenuItem.Name = "importarXMLToolStripMenuItem";
-            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.importarXMLToolStripMenuItem.Text = "Importar XML";
+            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importarXMLToolStripMenuItem.Text = "Importar XML...";
             this.importarXMLToolStripMenuItem.Click += new System.EventHandler(this.importarXMLToolStripMenuItem_Click);
             // 
             // exportarXMLToolStripMenuItem
             // 
             this.exportarXMLToolStripMenuItem.Name = "exportarXMLToolStripMenuItem";
-            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.exportarXMLToolStripMenuItem.Text = "Exportar XML";
+            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportarXMLToolStripMenuItem.Text = "Exportar XML...";
             this.exportarXMLToolStripMenuItem.Click += new System.EventHandler(this.exportarXMLToolStripMenuItem_Click);
             // 
             // executarToolStripMenuItem
@@ -122,14 +123,14 @@ namespace DataSourcesConverter {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbLog.Location = new System.Drawing.Point(3, 3);
             this.rtbLog.Name = "rtbLog";
-            this.rtbLog.Size = new System.Drawing.Size(353, 422);
+            this.rtbLog.Size = new System.Drawing.Size(352, 422);
             this.rtbLog.TabIndex = 2;
             this.rtbLog.Text = "";
             // 
             // btClearLog
             // 
             this.btClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btClearLog.Location = new System.Drawing.Point(233, 431);
+            this.btClearLog.Location = new System.Drawing.Point(232, 431);
             this.btClearLog.Name = "btClearLog";
             this.btClearLog.Size = new System.Drawing.Size(123, 28);
             this.btClearLog.TabIndex = 3;
@@ -156,6 +157,10 @@ namespace DataSourcesConverter {
             this.splitContainer1.SplitterDistance = 700;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 4;
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Ficheiros XML|*.xml";
             // 
             // FormHome
             // 
@@ -197,6 +202,7 @@ namespace DataSourcesConverter {
         private System.Windows.Forms.RichTextBox rtbLog;
         private System.Windows.Forms.Button btClearLog;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

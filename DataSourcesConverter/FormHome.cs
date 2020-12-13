@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataSourcesConverter.Utils;
 
 namespace DataSourcesConverter {
     public partial class FormHome : Form {
@@ -225,7 +226,11 @@ namespace DataSourcesConverter {
         }
 
         private void exportarXMLToolStripMenuItem_Click(object sender, EventArgs e) {
-
+            if(saveFileDialog.ShowDialog() == DialogResult.OK) {
+                MessageBox.Show(saveFileDialog.FileName);
+            }
+            /*XmlManager xmlManager = new XmlManager();
+            xmlManager.ExportToXML("", flows);*/
         }
 
         private void executarToolStripMenuItem_Click(object sender, EventArgs e) {

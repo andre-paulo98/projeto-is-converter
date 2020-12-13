@@ -165,7 +165,7 @@ namespace DataSourcesConverter.Utils {
 
             XmlElement name = doc.CreateElement("Name");
             name.InnerText = output.Name;
-
+            o.AppendChild(name);
 
             if (output.Type == OutputType.HtmlFileOutput) {
                 FileHtmlOutput fileOutput = (FileHtmlOutput)output;

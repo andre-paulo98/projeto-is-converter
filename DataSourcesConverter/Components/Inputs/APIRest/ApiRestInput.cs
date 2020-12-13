@@ -48,8 +48,12 @@ namespace DataSourcesConverter.Components.Inputs.APIRest {
                     json = myStreamReader.ReadToEnd();
                 }
             } catch (Exception e) {
-                Logger.Instance.error(Name, "Erro a efetuar o pedido: ");
-                Logger.Instance.status(Name, e.Message);
+                if (log) {
+                    Logger.Instance.error(Name, "Erro a efetuar o pedido: ");
+                    Logger.Instance.status(Name, e.Message);
+                } else {
+                    throw e;
+                }
             }
 
             return json;

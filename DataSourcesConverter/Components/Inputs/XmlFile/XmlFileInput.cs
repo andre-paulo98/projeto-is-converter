@@ -18,31 +18,31 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
         }
 
         public override void run(ReceiveCallback callback) {
-            Logger.Instance.info(Type.ToString(), "Ler ficheiro xml");
+            Logger.Instance.info(Name, "Ler ficheiro xml");
             XmlNode data = readFile(true);
             if(data != null){
-                Logger.Instance.status(Type.ToString(), "A processar ficheiro...");
+                Logger.Instance.status(Name, "A processar ficheiro...");
                 string output = JsonConvert.SerializeXmlNode(data, Newtonsoft.Json.Formatting.Indented).Replace("@", "");
-                Logger.Instance.success(Type.ToString(), "Ler ficheiro xml -- Concluido");
+                Logger.Instance.success(Name, "Ler ficheiro xml -- Concluido");
                 callback(output);
             }else {
-                Logger.Instance.error(Type.ToString(), "Ler ficheiro xml -- Falhou");
+                Logger.Instance.error(Name, "Ler ficheiro xml -- Falhou");
             }
         }
 
         public XmlNode readFile(bool log = false) {
             try {
                 if(log)
-                Logger.Instance.status(Type.ToString(), "A abrir ficheiro...");
+                Logger.Instance.status(Name, "A abrir ficheiro...");
                 XmlDocument doc = new XmlDocument();
                 if (log)
-                    Logger.Instance.status(Type.ToString(), "A ler ficheiro...");
+                    Logger.Instance.status(Name, "A ler ficheiro...");
                 doc.Load(path);
                 return doc.DocumentElement;
             } catch (Exception e) {
                 if (log) {
-                    Logger.Instance.error(Type.ToString(), "Erro a ler o ficheiro: ");
-                    Logger.Instance.status(Type.ToString(), e.Message);
+                    Logger.Instance.error(Name, "Erro a ler o ficheiro: ");
+                    Logger.Instance.status(Name, e.Message);
                 } else {
                     throw e;
                 }

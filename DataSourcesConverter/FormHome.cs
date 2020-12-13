@@ -227,10 +227,9 @@ namespace DataSourcesConverter {
 
         private void exportarXMLToolStripMenuItem_Click(object sender, EventArgs e) {
             if(saveFileDialog.ShowDialog() == DialogResult.OK) {
-                MessageBox.Show(saveFileDialog.FileName);
+                XmlManager xmlManager = new XmlManager();
+                xmlManager.ExportToXML(saveFileDialog.FileName, flows);
             }
-            /*XmlManager xmlManager = new XmlManager();
-            xmlManager.ExportToXML("", flows);*/
         }
 
         private void executarToolStripMenuItem_Click(object sender, EventArgs e) {

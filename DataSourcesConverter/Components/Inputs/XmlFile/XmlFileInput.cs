@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DataSourcesConverter.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             Logger.Instance.info(Type.ToString(), "Ler ficheiro xml");
             string response = getResponse();
             callback(response);
-            Logger.Instance.info(Type.ToString(), "Ler ficheiro xml -- Concluido");
+            Logger.Instance.success(Type.ToString(), "Ler ficheiro xml -- Concluido");
         }
 
         public string getResponse() {
@@ -30,9 +31,11 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
                 doc.Load(path);
                 Logger.Instance.status(Type.ToString(), "A processar ficheir...");
                 return JsonConvert.SerializeXmlNode(doc.DocumentElement,Newtonsoft.Json.Formatting.Indented).Replace("@","");
-            } catch (Exception) {
-                throw;
+            } catch (Exception e) {
+                Logger.Instance.error(Type.ToString(), "Erro a ler o ficheiro: ");
+                Logger.Instance.status(Type.ToString(), e.Message);
             }
+            return "";
         }
     }
 }

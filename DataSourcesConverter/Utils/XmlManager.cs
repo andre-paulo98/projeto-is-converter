@@ -113,11 +113,11 @@ namespace DataSourcesConverter.Utils {
                 ApiRestOutput apiOutput = (ApiRestOutput)output;
 
                 XmlElement url = doc.CreateElement("Url");
-                url.InnerText = apiOutput.url;
+                url.InnerText = apiOutput.Url;
                 o.AppendChild(url);
 
                 XmlElement method = doc.CreateElement("Method");
-                method.InnerText = apiOutput.method;
+                method.InnerText = apiOutput.Method;
                 o.AppendChild(method);
             }
 

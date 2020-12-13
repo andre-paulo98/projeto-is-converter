@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using DataSourcesConverter.Utils;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,39 +33,51 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
 
         public override void run(ReceiveCallback callback) {
             if (IsConnected) {
-                disconnect();
+                disconnect(true);
                 return;
             }
             this.callback = callback;
             Logger.Instance.info(Type.ToString(), "Ligar a broker");
-            connect();
+            connect(true);
 
         }
 
-        public void disconnect() {
+        public void disconnect(bool log = false) {
             if (IsConnected) {
-                Logger.Instance.status(Type.ToString(), "A desligar ao broker...");
+                if (log)
+                    Logger.Instance.status(Type.ToString(), "A desligar ao broker...");
                 if (Topics.Count > 0)
                     mClient.Unsubscribe(Topics.ToArray());
                 mClient.Disconnect();
-                Logger.Instance.info(Type.ToString(), "Ligar a broker -- Concuido");
+                if (log)
+                    Logger.Instance.success(Type.ToString(), "Ligar a broker -- Concuido");
             }
         }
 
-        public bool connect() {
-            disconnect();
+        public bool connect(bool log = false) {
+            disconnect(log);
             try {
-                Logger.Instance.status(Type.ToString(), "A definir o ip do broker");
+                if (log)
+                    Logger.Instance.status(Type.ToString(), "A definir o ip do broker...");
                 mClient = new MqttClient(Host);
+                if (log)
+                    Logger.Instance.status(Type.ToString(), "A conectar ao broker...");
                 mClient.Connect(Guid.NewGuid().ToString());
-                Logger.Instance.status(Type.ToString(), "Ligado");
                 if (Topics.Count > 0)
                     subscribe();
 
+                mClient.MqttMsgPublishReceived += MClient_MqttMsgPublishReceived;
+
             } catch (Exception e) {
-                throw new Exception("Broker Input: " + e.InnerException.Message);
+                if (log) {
+                    Logger.Instance.error(Type.ToString(), "Erro a ligar ao broker: ");
+                    Logger.Instance.status(Type.ToString(), e.Message);
+                } else {
+                    throw e;
+                }
+                return false;
             }
-            mClient.MqttMsgPublishReceived += MClient_MqttMsgPublishReceived;
+
 
             return mClient.IsConnected;
         }
@@ -72,7 +85,7 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
 
         private void subscribe() {
             if (IsConnected) {
-                Logger.Instance.status(Type.ToString(), "A subscrever canais");
+                Logger.Instance.status(Type.ToString(), "A subscrever canais...");
                 byte[] qosLevels = new byte[Topics.Count];
                 for (int i = 0; i < Topics.Count; i++) {
                     qosLevels[i] = MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE;
@@ -83,7 +96,7 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
         }
 
         private void MClient_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e) {
-            Logger.Instance.info(Type.ToString(), "Nova mensagem do broker");
+            Logger.Instance.info(Type.ToString(), "Nova mensagem do broker!!!");
             JObject json = new JObject(
                 new JProperty("topic", e.Topic),
                 new JProperty("message", Encoding.UTF8.GetString(e.Message))

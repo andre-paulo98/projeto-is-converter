@@ -7,6 +7,7 @@ using System.Dynamic;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json.Linq;
+using DataSourcesConverter.Utils;
 
 namespace DataSourcesConverter.Components.Inputs.APIRest {
     public class ApiRestInput : FlowInput {
@@ -21,7 +22,7 @@ namespace DataSourcesConverter.Components.Inputs.APIRest {
             Logger.Instance.info(Type.ToString(), "Pedido HTTP");
             string response = getResponse(true);
             callback(response);
-            Logger.Instance.info(Type.ToString(), "Pedido HTTP -- Concluido");
+            Logger.Instance.success(Type.ToString(), "Pedido HTTP -- Concluido");
         }
 
         public string getResponse(bool log = false) {

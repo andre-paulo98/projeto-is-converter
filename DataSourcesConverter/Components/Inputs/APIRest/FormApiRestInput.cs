@@ -13,7 +13,7 @@ namespace DataSourcesConverter.Components.Inputs.APIRest
             InitializeComponent();
             output = api;
             tbName.Text = output.Name;
-            tb_url.Text = "https://jsonplaceholder.typicode.com/posts"; // output.url;
+            tb_url.Text = output.url;
             cbMethod.SelectedIndex = 0;
         }
 

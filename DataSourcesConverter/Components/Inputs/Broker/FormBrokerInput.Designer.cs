@@ -76,6 +76,7 @@
             // 
             // btSave
             // 
+            this.btSave.Enabled = false;
             this.btSave.Location = new System.Drawing.Point(340, 491);
             this.btSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSave.Name = "btSave";
@@ -144,6 +145,7 @@
             // 
             // btRemove
             // 
+            this.btRemove.Enabled = false;
             this.btRemove.Location = new System.Drawing.Point(288, 300);
             this.btRemove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btRemove.Name = "btRemove";

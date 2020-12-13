@@ -269,7 +269,11 @@ namespace DataSourcesConverter {
         }
 
         private void FormHome_FormClosing(object sender, FormClosingEventArgs e) {
-            //TODO Fechar conecção do broker 
+            foreach (var flow in flows.Values) {
+                if(flow != null && flow.Input != null && flow.Input.Type == InputType.BrokerInput && ((BrokerInput)flow.Input).IsConnected == true) {
+                    ((BrokerInput)flow.Input).run(null);
+                }
+            }
         }
 
         private void btClearLog_Click(object sender, EventArgs e) {

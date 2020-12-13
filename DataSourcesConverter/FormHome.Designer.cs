@@ -91,14 +91,14 @@ namespace DataSourcesConverter {
             // importarXMLToolStripMenuItem
             // 
             this.importarXMLToolStripMenuItem.Name = "importarXMLToolStripMenuItem";
-            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.importarXMLToolStripMenuItem.Text = "Importar XML...";
             this.importarXMLToolStripMenuItem.Click += new System.EventHandler(this.importarXMLToolStripMenuItem_Click);
             // 
             // exportarXMLToolStripMenuItem
             // 
             this.exportarXMLToolStripMenuItem.Name = "exportarXMLToolStripMenuItem";
-            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.exportarXMLToolStripMenuItem.Text = "Exportar XML...";
             this.exportarXMLToolStripMenuItem.Click += new System.EventHandler(this.exportarXMLToolStripMenuItem_Click);
             // 
@@ -123,18 +123,18 @@ namespace DataSourcesConverter {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbLog.Location = new System.Drawing.Point(3, 3);
             this.rtbLog.Name = "rtbLog";
-            this.rtbLog.Size = new System.Drawing.Size(352, 422);
+            this.rtbLog.Size = new System.Drawing.Size(351, 422);
             this.rtbLog.TabIndex = 2;
             this.rtbLog.Text = "";
             // 
             // btClearLog
             // 
             this.btClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btClearLog.Location = new System.Drawing.Point(232, 431);
+            this.btClearLog.Location = new System.Drawing.Point(206, 431);
             this.btClearLog.Name = "btClearLog";
-            this.btClearLog.Size = new System.Drawing.Size(123, 28);
+            this.btClearLog.Size = new System.Drawing.Size(148, 28);
             this.btClearLog.TabIndex = 3;
-            this.btClearLog.Text = "Clear Log";
+            this.btClearLog.Text = "Limpar mensagens";
             this.btClearLog.UseVisualStyleBackColor = true;
             this.btClearLog.Click += new System.EventHandler(this.btClearLog_Click);
             // 

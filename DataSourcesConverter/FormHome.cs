@@ -163,6 +163,9 @@ namespace DataSourcesConverter {
 
         private void deleteCallback(int id) {
             if (MessageBox.Show("Tem a certeza que prentende apagar este flow?", "Confirmação", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                if (flows[id].Input.Type == InputType.BrokerInput) {
+                    ((BrokerInput)flows[id].Input).disconnect(true);
+                }
                 updateFlowsList(id, true);
                 flows.Remove(id);
                 tilesItemViews.Remove(id);

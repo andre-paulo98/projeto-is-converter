@@ -87,8 +87,10 @@ namespace DataSourcesConverter.ItemViews {
 
             if(Flow.Input != null && Flow.Input.Type == InputType.BrokerInput && ((BrokerInput)Flow.Input).IsConnected) {
                 btRun.BackgroundImage = Properties.Resources.pause_button;
+                btRun.BackColor = Color.Orange;
             } else {
                 btRun.BackgroundImage = Properties.Resources.run_button;
+                btRun.BackColor = Color.LimeGreen;
             }
         }
 
@@ -111,6 +113,14 @@ namespace DataSourcesConverter.ItemViews {
 
         private void btDelete_Click(object sender, EventArgs e) {
             deleteCallback(Flow.ID);
+        }
+
+        private void btEditInput_Click(object sender, EventArgs e) {
+            setInputCallback(Flow.ID);
+        }
+
+        private void btEditOutput_Click(object sender, EventArgs e) {
+            setOutputCallback(Flow.ID);
         }
     }
 }

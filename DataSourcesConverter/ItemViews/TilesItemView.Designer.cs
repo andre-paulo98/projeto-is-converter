@@ -25,7 +25,6 @@ namespace DataSourcesConverter.ItemViews {
         /// </summary>
         private void InitializeComponent() {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btSetInput = new System.Windows.Forms.Button();
             this.groupBoxInput = new System.Windows.Forms.GroupBox();
@@ -41,15 +40,18 @@ namespace DataSourcesConverter.ItemViews {
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btEditInput = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btDelete = new System.Windows.Forms.Button();
             this.btRun = new System.Windows.Forms.Button();
+            this.btEditOutput = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBoxInput.SuspendLayout();
             this.panelOutput.SuspendLayout();
             this.groupBoxOutput.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -73,18 +75,6 @@ namespace DataSourcesConverter.ItemViews {
             this.tableLayoutPanel1.Size = new System.Drawing.Size(642, 92);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::DataSourcesConverter.Properties.Resources.right_arrow;
-            this.pictureBox1.Location = new System.Drawing.Point(308, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 92);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btSetInput);
@@ -99,9 +89,9 @@ namespace DataSourcesConverter.ItemViews {
             // btSetInput
             // 
             this.btSetInput.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btSetInput.Location = new System.Drawing.Point(168, 0);
+            this.btSetInput.Location = new System.Drawing.Point(233, 0);
             this.btSetInput.Name = "btSetInput";
-            this.btSetInput.Size = new System.Drawing.Size(75, 92);
+            this.btSetInput.Size = new System.Drawing.Size(10, 92);
             this.btSetInput.TabIndex = 4;
             this.btSetInput.Text = "Definir Input";
             this.btSetInput.UseVisualStyleBackColor = true;
@@ -109,6 +99,7 @@ namespace DataSourcesConverter.ItemViews {
             // 
             // groupBoxInput
             // 
+            this.groupBoxInput.Controls.Add(this.btEditInput);
             this.groupBoxInput.Controls.Add(this.lblNameInput);
             this.groupBoxInput.Controls.Add(this.lblTypeInput);
             this.groupBoxInput.Controls.Add(this.label2);
@@ -178,9 +169,9 @@ namespace DataSourcesConverter.ItemViews {
             // btSetOutput
             // 
             this.btSetOutput.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btSetOutput.Location = new System.Drawing.Point(169, 0);
+            this.btSetOutput.Location = new System.Drawing.Point(234, 0);
             this.btSetOutput.Name = "btSetOutput";
-            this.btSetOutput.Size = new System.Drawing.Size(75, 92);
+            this.btSetOutput.Size = new System.Drawing.Size(10, 92);
             this.btSetOutput.TabIndex = 4;
             this.btSetOutput.Text = "Definir Output";
             this.btSetOutput.UseVisualStyleBackColor = true;
@@ -188,6 +179,7 @@ namespace DataSourcesConverter.ItemViews {
             // 
             // groupBoxOutput
             // 
+            this.groupBoxOutput.Controls.Add(this.btEditOutput);
             this.groupBoxOutput.Controls.Add(this.lblNameOutput);
             this.groupBoxOutput.Controls.Add(this.lblTypeOutput);
             this.groupBoxOutput.Controls.Add(this.label3);
@@ -258,6 +250,31 @@ namespace DataSourcesConverter.ItemViews {
             this.tableLayoutPanel2.Size = new System.Drawing.Size(60, 86);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
+            // btEditInput
+            // 
+            this.btEditInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btEditInput.BackgroundImage = global::DataSourcesConverter.Properties.Resources.edit;
+            this.btEditInput.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btEditInput.Location = new System.Drawing.Point(188, 24);
+            this.btEditInput.Name = "btEditInput";
+            this.btEditInput.Size = new System.Drawing.Size(46, 45);
+            this.btEditInput.TabIndex = 4;
+            this.btEditInput.UseVisualStyleBackColor = true;
+            this.btEditInput.Click += new System.EventHandler(this.btEditInput_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::DataSourcesConverter.Properties.Resources.right_arrow;
+            this.pictureBox1.Location = new System.Drawing.Point(308, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 92);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // btDelete
             // 
             this.btDelete.BackColor = System.Drawing.Color.Red;
@@ -292,6 +309,19 @@ namespace DataSourcesConverter.ItemViews {
             this.btRun.Visible = false;
             this.btRun.Click += new System.EventHandler(this.btRun_Click);
             // 
+            // btEditOutput
+            // 
+            this.btEditOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btEditOutput.BackgroundImage = global::DataSourcesConverter.Properties.Resources.edit;
+            this.btEditOutput.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btEditOutput.Location = new System.Drawing.Point(191, 24);
+            this.btEditOutput.Name = "btEditOutput";
+            this.btEditOutput.Size = new System.Drawing.Size(46, 45);
+            this.btEditOutput.TabIndex = 5;
+            this.btEditOutput.UseVisualStyleBackColor = true;
+            this.btEditOutput.Click += new System.EventHandler(this.btEditOutput_Click);
+            // 
             // TilesItemView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -305,7 +335,6 @@ namespace DataSourcesConverter.ItemViews {
             this.Name = "TilesItemView";
             this.Size = new System.Drawing.Size(642, 92);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.groupBoxInput.ResumeLayout(false);
             this.groupBoxInput.PerformLayout();
@@ -313,6 +342,7 @@ namespace DataSourcesConverter.ItemViews {
             this.groupBoxOutput.ResumeLayout(false);
             this.groupBoxOutput.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -338,5 +368,7 @@ namespace DataSourcesConverter.ItemViews {
         private System.Windows.Forms.Panel panelOutput;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btDelete;
+        private System.Windows.Forms.Button btEditInput;
+        private System.Windows.Forms.Button btEditOutput;
     }
 }

@@ -192,5 +192,8 @@
   <ItemGroup>
     <None Include="Resources\pause-button.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

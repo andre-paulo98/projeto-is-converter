@@ -23,11 +23,11 @@ namespace DataSourcesConverter.Components.Output.FileHtml {
         }
 
         public override bool run(string data) {
-            Logger.Instance.info(Type.ToString(), "Escrita para ficheiro HTML");
-            Logger.Instance.status(Type.ToString(), "A ler o ficheiro ...");
+            Logger.Instance.info(Name, "Escrita para ficheiro HTML");
+            Logger.Instance.status(Name, "A ler o ficheiro ...");
             string exists = FileRead();
 
-            Logger.Instance.status(Type.ToString(), "A obter os dados ...");
+            Logger.Instance.status(Name, "A obter os dados ...");
             JToken json = JToken.Parse(data);
 
             dynamic output;
@@ -39,18 +39,19 @@ namespace DataSourcesConverter.Components.Output.FileHtml {
                 throw new NotSupportedException("Json output not suported!!");
             }
 
-            Logger.Instance.status(Type.ToString(), "A converter os dados ...");
+            Logger.Instance.status(Name, "A converter os dados ...");
             string file = HTML(output, exists);
 
-            Logger.Instance.status(Type.ToString(), "A escrever os dados para o ficheiro...");
+            Logger.Instance.status(Name, "A escrever os dados para o ficheiro...");
             try {
                 File.WriteAllText(Path, file);
             } catch (Exception e) {
-                Logger.Instance.error(Type.ToString(), "Erro a escrever para ficheiro HTML: ");
-                Logger.Instance.status(Type.ToString(), e.Message);
+                Logger.Instance.error(Name, "Erro a escrever para ficheiro HTML: ");
+                Logger.Instance.status(Name, e.Message);
+                Logger.Instance.error(Name, "Escrita para ficheiro HTML -- Falhou");
                 return false;
             }
-            Logger.Instance.success(Type.ToString(), "Escrita para ficheiro HTML -- Concluido");
+            Logger.Instance.success(Name, "Escrita para ficheiro HTML -- Concluido");
             return true;
         }
 

@@ -19,31 +19,37 @@ namespace DataSourcesConverter.Components.Inputs.APIRest {
         }
 
         public override void run(ReceiveCallback callback) {
-            Logger.Instance.info(Type.ToString(), "Pedido HTTP");
+            Logger.Instance.info(Name, "Pedido HTTP");
             string response = getResponse(true);
-            callback(response);
-            Logger.Instance.success(Type.ToString(), "Pedido HTTP -- Concluido");
+            if (response != string.Empty) {
+                Logger.Instance.success(Name, "Pedido HTTP -- Concluido");
+                callback(response);
+            } else {
+                Logger.Instance.error(Name, "Pedido HTTP -- Falhou");
+            }
+            
+            
         }
 
         public string getResponse(bool log = false) {
             string json = null;
             try {
                 if (log)
-                    Logger.Instance.status(Type.ToString(), "A configurar o pedido HTTP...");
+                    Logger.Instance.status(Name, "A configurar o pedido HTTP...");
                 
                 HttpWebRequest request = WebRequest.CreateHttp(url);
                 request.Method = method;
 
                 if (log)
-                    Logger.Instance.status(Type.ToString(), "A executar o pedido HTTP...");
+                    Logger.Instance.status(Name, "A executar o pedido HTTP...");
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 using (Stream responseStream = response.GetResponseStream())
                 using (StreamReader myStreamReader = new StreamReader(responseStream, Encoding.UTF8)) {
                     json = myStreamReader.ReadToEnd();
                 }
             } catch (Exception e) {
-                Logger.Instance.error(Type.ToString(), "Erro a efetuar o pedido: ");
-                Logger.Instance.status(Type.ToString(), e.Message);
+                Logger.Instance.error(Name, "Erro a efetuar o pedido: ");
+                Logger.Instance.status(Name, e.Message);
             }
 
             return json;

@@ -37,7 +37,7 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
                 return;
             }
             this.callback = callback;
-            Logger.Instance.info(Type.ToString(), "Ligar a broker");
+            Logger.Instance.info(Name, "Ligar a broker");
             connect(true);
 
         }
@@ -45,12 +45,12 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
         public void disconnect(bool log = false) {
             if (IsConnected) {
                 if (log)
-                    Logger.Instance.status(Type.ToString(), "A desligar ao broker...");
+                    Logger.Instance.status(Name, "A desligar ao broker...");
                 if (Topics.Count > 0)
                     mClient.Unsubscribe(Topics.ToArray());
                 mClient.Disconnect();
                 if (log)
-                    Logger.Instance.success(Type.ToString(), "Ligar a broker -- Concuido");
+                    Logger.Instance.success(Name, "Ligar a broker -- Concuido");
             }
         }
 
@@ -58,10 +58,10 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
             disconnect(log);
             try {
                 if (log)
-                    Logger.Instance.status(Type.ToString(), "A definir o ip do broker...");
+                    Logger.Instance.status(Name, "A definir o ip do broker...");
                 mClient = new MqttClient(Host);
                 if (log)
-                    Logger.Instance.status(Type.ToString(), "A conectar ao broker...");
+                    Logger.Instance.status(Name, "A conectar ao broker...");
                 mClient.Connect(Guid.NewGuid().ToString());
                 if (Topics.Count > 0)
                     subscribe();
@@ -70,8 +70,8 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
 
             } catch (Exception e) {
                 if (log) {
-                    Logger.Instance.error(Type.ToString(), "Erro a ligar ao broker: ");
-                    Logger.Instance.status(Type.ToString(), e.Message);
+                    Logger.Instance.error(Name, "Erro a ligar ao broker: ");
+                    Logger.Instance.status(Name, e.Message);
                 } else {
                     throw e;
                 }
@@ -85,7 +85,7 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
 
         private void subscribe() {
             if (IsConnected) {
-                Logger.Instance.status(Type.ToString(), "A subscrever canais...");
+                Logger.Instance.status(Name, "A subscrever canais...");
                 byte[] qosLevels = new byte[Topics.Count];
                 for (int i = 0; i < Topics.Count; i++) {
                     qosLevels[i] = MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE;
@@ -96,7 +96,7 @@ namespace DataSourcesConverter.Components.Inputs.Broker {
         }
 
         private void MClient_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e) {
-            Logger.Instance.info(Type.ToString(), "Nova mensagem do broker!!!");
+            Logger.Instance.info(Name, "Nova mensagem do broker!!!");
             JObject json = new JObject(
                 new JProperty("topic", e.Topic),
                 new JProperty("message", Encoding.UTF8.GetString(e.Message))

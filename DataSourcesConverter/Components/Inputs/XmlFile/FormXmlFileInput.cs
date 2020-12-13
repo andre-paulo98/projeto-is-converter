@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace DataSourcesConverter.Components.Inputs.XmlFile {
     public partial class FormXmlFileInput : Form {
 
         XmlFileInput xmlFile;
-        
+
         public FormXmlFileInput(XmlFileInput file) {
             InitializeComponent();
             xmlFile = file;
@@ -24,7 +25,19 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             if (openFileDialog.ShowDialog(this) == DialogResult.OK) {
                 xmlFile.path = openFileDialog.FileName;
                 tbFilePath.Text = xmlFile.path;
-                rtbResult.Text = xmlFile.getResponse();
+                XmlNode doc = null;
+                try {
+                    doc = xmlFile.readFile();
+                }catch(Exception ex) {
+                    MessageBox.Show(ex.Message,"Erro a ler o ficheiro XML", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                using (var sw = new System.IO.StringWriter())
+                using (var xw = new System.Xml.XmlTextWriter(sw)) {
+                    xw.Formatting = System.Xml.Formatting.Indented;
+                    doc.WriteContentTo(xw);
+                    rtbResult.Text = sw.ToString();
+                }
                 btSave.Enabled = true;
             }
         }

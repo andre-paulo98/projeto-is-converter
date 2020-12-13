@@ -7,18 +7,9 @@ using DataSourcesConverter.Components.Output;
 using DataSourcesConverter.Components.Output.FileHtml;
 using DataSourcesConverter.Components.Output.APIRest;
 using DataSourcesConverter.teste;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataSourcesConverter.Utils;
 
@@ -163,7 +154,6 @@ namespace DataSourcesConverter {
                 flow.Input.run((data) => {
                     flow.Output.run(data);
                 });
-                Logger.Instance.info("MAIN", "Alterar botão");
                 if (flow.Input.Type == InputType.BrokerInput) {
                     updateFlowsList(id);
                 }
@@ -233,13 +223,19 @@ namespace DataSourcesConverter {
         }
 
         private void executarToolStripMenuItem_Click(object sender, EventArgs e) {
-
+            foreach (var item in flows) {
+                if (item.Value.Input == null || item.Value.Output == null)
+                    continue;
+                item.Value.Input.run((result) => {
+                    item.Value.Output.run(result);
+                });
+                updateFlowsList(item.Key);
+            }
         }
 
         private void adicionarToolStripMenuItem_Click(object sender, EventArgs e) {
             addEmptyTile();
         }
-
 
 
         private void log(string level, string line) {

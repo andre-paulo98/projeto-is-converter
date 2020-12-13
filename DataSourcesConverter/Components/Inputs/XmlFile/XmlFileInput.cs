@@ -19,23 +19,35 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
 
         public override void run(ReceiveCallback callback) {
             Logger.Instance.info(Type.ToString(), "Ler ficheiro xml");
-            string response = getResponse();
-            callback(response);
-            Logger.Instance.success(Type.ToString(), "Ler ficheiro xml -- Concluido");
+            XmlNode data = readFile(true);
+            if(data != null){
+                Logger.Instance.status(Type.ToString(), "A processar ficheiro...");
+                string output = JsonConvert.SerializeXmlNode(data, Newtonsoft.Json.Formatting.Indented).Replace("@", "");
+                Logger.Instance.success(Type.ToString(), "Ler ficheiro xml -- Concluido");
+                callback(output);
+            }else {
+                Logger.Instance.error(Type.ToString(), "Ler ficheiro xml -- Falhou");
+            }
         }
 
-        public string getResponse() {
+        public XmlNode readFile(bool log = false) {
             try {
+                if(log)
                 Logger.Instance.status(Type.ToString(), "A abrir ficheiro...");
                 XmlDocument doc = new XmlDocument();
+                if (log)
+                    Logger.Instance.status(Type.ToString(), "A ler ficheiro...");
                 doc.Load(path);
-                Logger.Instance.status(Type.ToString(), "A processar ficheir...");
-                return JsonConvert.SerializeXmlNode(doc.DocumentElement,Newtonsoft.Json.Formatting.Indented).Replace("@","");
+                return doc.DocumentElement;
             } catch (Exception e) {
-                Logger.Instance.error(Type.ToString(), "Erro a ler o ficheiro: ");
-                Logger.Instance.status(Type.ToString(), e.Message);
+                if (log) {
+                    Logger.Instance.error(Type.ToString(), "Erro a ler o ficheiro: ");
+                    Logger.Instance.status(Type.ToString(), e.Message);
+                } else {
+                    throw e;
+                }
             }
-            return "";
+            return null;
         }
     }
 }

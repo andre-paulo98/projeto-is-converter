@@ -6,7 +6,7 @@ using DataSourcesConverter.Components.Inputs.Broker;
 using DataSourcesConverter.Components.Output;
 using DataSourcesConverter.Components.Output.FileHtml;
 using DataSourcesConverter.Components.Output.APIRest;
-using DataSourcesConverter.teste;
+using DataSourcesConverter.ItemViews;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -194,7 +194,11 @@ namespace DataSourcesConverter {
         }
 
         private void addEmptyTile() {
-            Flow flow = new Flow() { ID = NEXT_ID++, Input = null, Output = null };
+            addTile(null, null);
+        }
+
+        private void addTile(FlowInput flowInput, FlowOutput flowOutput) {
+            Flow flow = new Flow() { ID = NEXT_ID++, Input = flowInput, Output = flowOutput };
             flows.Add(flow.ID, flow);
 
             TilesItemView tile = new TilesItemView(flow, runCallback, setInputCallback, setOutputCallback, deleteCallback);
@@ -212,7 +216,24 @@ namespace DataSourcesConverter {
         }
 
         private void importarXMLToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                XmlManager manager = new XmlManager();
+                List<Flow> listFlows = manager.ImportXML(openFileDialog.FileName);
 
+                flows.Clear();
+                tilesItemViews.Clear();
+
+                do {
+                    flowsPanel.Controls.RemoveAt(1);
+                } while (flowsPanel.Controls.Count > 1);
+
+                foreach (var item in listFlows) {
+                    addTile(item.Input, item.Output);
+                }
+
+                addEmptyTile();
+            }
+            
         }
 
         private void exportarXMLToolStripMenuItem_Click(object sender, EventArgs e) {

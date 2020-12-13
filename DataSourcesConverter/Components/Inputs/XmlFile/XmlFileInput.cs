@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace DataSourcesConverter.Components.Inputs.XmlFile {
     public class XmlFileInput : FlowInput {
-        public string path { get; set; }
+        public string Path { get; set; }
         XmlDocument dom;
 
         public XmlFileInput() {
@@ -37,7 +37,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
                 XmlDocument doc = new XmlDocument();
                 if (log)
                     Logger.Instance.status(Name, "A ler ficheiro...");
-                doc.Load(path);
+                doc.Load(Path);
                 return doc.DocumentElement;
             } catch (Exception e) {
                 if (log) {

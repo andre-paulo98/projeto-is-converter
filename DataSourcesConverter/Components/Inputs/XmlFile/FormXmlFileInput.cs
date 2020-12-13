@@ -18,13 +18,13 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             InitializeComponent();
             xmlFile = file;
             tbName.Text = xmlFile.Name;
-            tbFilePath.Text = xmlFile.path;
+            tbFilePath.Text = xmlFile.Path;
         }
 
         private void btChooseFile_Click(object sender, EventArgs e) {
             if (openFileDialog.ShowDialog(this) == DialogResult.OK) {
-                xmlFile.path = openFileDialog.FileName;
-                tbFilePath.Text = xmlFile.path;
+                xmlFile.Path = openFileDialog.FileName;
+                tbFilePath.Text = xmlFile.Path;
                 XmlNode doc = null;
                 try {
                     doc = xmlFile.readFile();
@@ -43,7 +43,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
         }
 
         private void btSave_Click(object sender, EventArgs e) {
-            xmlFile.path = tbFilePath.Text;
+            xmlFile.Path = tbFilePath.Text;
             xmlFile.Name = tbName.Text;
 
             DialogResult = DialogResult.OK;

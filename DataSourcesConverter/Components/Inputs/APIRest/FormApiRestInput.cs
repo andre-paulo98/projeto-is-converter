@@ -13,7 +13,7 @@ namespace DataSourcesConverter.Components.Inputs.APIRest
             InitializeComponent();
             output = api;
             tbName.Text = output.Name;
-            tb_url.Text = output.url;
+            tb_url.Text = output.Url;
             cbMethod.SelectedIndex = 0;
         }
 
@@ -27,8 +27,8 @@ namespace DataSourcesConverter.Components.Inputs.APIRest
             bt_request.Enabled = false;
             try
             {
-                output.url = tb_url.Text;
-                output.method = cbMethod.Text;
+                output.Url = tb_url.Text;
+                output.Method = cbMethod.Text;
                 rtb_result.Text = output.getResponse();
                                 
                 bt_save.Enabled = true;

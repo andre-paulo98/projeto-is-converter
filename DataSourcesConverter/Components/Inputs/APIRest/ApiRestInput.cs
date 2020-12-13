@@ -11,8 +11,8 @@ using DataSourcesConverter.Utils;
 
 namespace DataSourcesConverter.Components.Inputs.APIRest {
     public class ApiRestInput : FlowInput {
-        public string url { get; set; }
-        public string method { get; set; }
+        public string Url { get; set; }
+        public string Method { get; set; }
 
         public ApiRestInput() {
             Type = InputType.ApiRestInput;
@@ -37,8 +37,8 @@ namespace DataSourcesConverter.Components.Inputs.APIRest {
                 if (log)
                     Logger.Instance.status(Name, "A configurar o pedido HTTP...");
                 
-                HttpWebRequest request = WebRequest.CreateHttp(url);
-                request.Method = method;
+                HttpWebRequest request = WebRequest.CreateHttp(Url);
+                request.Method = Method;
 
                 if (log)
                     Logger.Instance.status(Name, "A executar o pedido HTTP...");

@@ -1,5 +1,5 @@
 ﻿
-namespace DataSourcesConverter.teste {
+namespace DataSourcesConverter.ItemViews {
     partial class TilesItemView {
         /// <summary> 
         /// Required designer variable.

@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DataSourcesConverter.teste {
+namespace DataSourcesConverter.ItemViews {
     public partial class TilesItemView : UserControl {
 
 

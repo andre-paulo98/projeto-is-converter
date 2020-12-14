@@ -40,5 +40,8 @@ namespace DataSourcesConverter {
         public void info(string from, string msg) {
             callback("INFO", $"{from}: {msg}\n");
         }
+        public void warning(string from, string msg) {
+            callback("WARNING", $"{from}: {msg}\n");
+        }
     }
 }

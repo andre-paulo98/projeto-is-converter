@@ -1,0 +1,66 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Flows" type="FlowsType"/>
+
+  <xs:complexType name="FlowsType">
+    <xs:sequence>
+      <xs:element type="FlowType" name="Flow" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="FlowType">
+    <xs:sequence>
+      <xs:choice minOccurs="1">
+        <xs:element type="ApiRestInputType" name="ApiRestInput"/>
+        <xs:element type="XmlFileInputType" name="XmlFileInput"/>
+        <xs:element type="BrokerInputType" name="BrokerInput"/>
+      </xs:choice>
+      <xs:choice minOccurs="0" maxOccurs="1">
+        <xs:element type="HtmlFileOutputType" name="HtmlFileOutput"/>
+        <xs:element type="ApiRestOutputType" name="ApiRestOutput"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="ApiRestInputType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Url"/>
+      <xs:element type="xs:string" name="Method"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="Name" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="XmlFileInputType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Path"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="Name" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="BrokerInputType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Host"/>
+      <xs:element type="TopicsType" name="Topics"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="Name" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="TopicsType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Topic" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="HtmlFileOutputType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Path"/>
+      <xs:element type="xs:string" name="Overwrite"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="Name" use="optional"/>
+  </xs:complexType> 
+  <xs:complexType name="ApiRestOutputType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Url"/>
+      <xs:element type="xs:string" name="Method"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="Name" use="optional"/>
+  </xs:complexType>
+
+</xs:schema>

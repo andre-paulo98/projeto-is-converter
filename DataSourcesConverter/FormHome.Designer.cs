@@ -124,14 +124,14 @@ namespace DataSourcesConverter {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbLog.Location = new System.Drawing.Point(3, 3);
             this.rtbLog.Name = "rtbLog";
-            this.rtbLog.Size = new System.Drawing.Size(350, 422);
+            this.rtbLog.Size = new System.Drawing.Size(349, 422);
             this.rtbLog.TabIndex = 2;
             this.rtbLog.Text = "";
             // 
             // btClearLog
             // 
             this.btClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btClearLog.Location = new System.Drawing.Point(230, 431);
+            this.btClearLog.Location = new System.Drawing.Point(208, 431);
             this.btClearLog.Name = "btClearLog";
             this.btClearLog.Size = new System.Drawing.Size(148, 28);
             this.btClearLog.TabIndex = 3;

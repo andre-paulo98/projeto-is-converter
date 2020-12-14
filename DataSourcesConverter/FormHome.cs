@@ -1,4 +1,4 @@
-﻿using DataSourcesConverter.Components;
+using DataSourcesConverter.Components;
 using DataSourcesConverter.Components.Inputs;
 using DataSourcesConverter.Components.Inputs.APIRest;
 using DataSourcesConverter.Components.Inputs.XmlFile;
@@ -221,20 +221,26 @@ namespace DataSourcesConverter {
         private void importarXMLToolStripMenuItem_Click(object sender, EventArgs e) {
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 XmlManager manager = new XmlManager();
-                List<Flow> listFlows = manager.ImportXML(openFileDialog.FileName);
 
-                flows.Clear();
-                tilesItemViews.Clear();
+                if(manager.ValidateXML(openFileDialog.FileName)) {
+                    List<Flow> listFlows = manager.ImportXML(openFileDialog.FileName);
 
-                do {
-                    flowsPanel.Controls.RemoveAt(1);
-                } while (flowsPanel.Controls.Count > 1);
+                    flows.Clear();
+                    tilesItemViews.Clear();
 
-                foreach (var item in listFlows) {
-                    addTile(item.Input, item.Output);
+                    do {
+                        flowsPanel.Controls.RemoveAt(1);
+                    } while (flowsPanel.Controls.Count > 1);
+
+                    foreach (var item in listFlows) {
+                        addTile(item.Input, item.Output);
+                    }
+
+                    addEmptyTile();
+                } else {
+                    MessageBox.Show("O XML não é válido, verifique a consola para mais informações", "XML Inválido", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                addEmptyTile();
             }
             
         }
@@ -286,6 +292,9 @@ namespace DataSourcesConverter {
                         break;
                     case "INFO":
                         rtbLog.SelectionColor = Color.Blue;
+                        break;
+                    case "WARNING":
+                        rtbLog.SelectionColor = Color.Yellow;
                         break;
                 }
                 rtbLog.ScrollToCaret();

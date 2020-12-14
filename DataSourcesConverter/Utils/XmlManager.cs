@@ -12,9 +12,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Schema;
 
 namespace DataSourcesConverter.Utils {
     class XmlManager {
+
+        private bool isValid;
+
+        public bool ValidateXML(string path) {
+            isValid = true;
+            try {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(path);
+                ValidationEventHandler eventHandler = new ValidationEventHandler(ValidateMethod);
+                doc.Schemas.Add(null, "schema.xsd");
+                doc.Validate(eventHandler);
+            } catch (XmlException e) {
+                isValid = false;
+                Logger.Instance.error("XML-VALIDATOR", e.ToString());
+            }
+
+            return isValid;
+        }
+
+        private void ValidateMethod(object sender, ValidationEventArgs args) {
+            isValid = false;
+            switch (args.Severity) {
+                case XmlSeverityType.Error:
+                    Logger.Instance.error("XML-VALIDATOR", args.Message);
+                    break;
+                case XmlSeverityType.Warning:
+                    Logger.Instance.warning("XML-VALIDATOR", args.Message);
+                    break;
+                default:
+                    break;
+            }
+        }
 
         public List<Flow> ImportXML(string path) {
 
@@ -28,25 +61,26 @@ namespace DataSourcesConverter.Utils {
             foreach (XmlNode item in nodes) {
 
                 Flow flow = new Flow();
-                XmlNode nodeInput = item.SelectSingleNode("Input");
-                InputType inputType = (InputType)Enum.Parse(typeof(InputType), nodeInput.Attributes["Type"].Value);
+
+                XmlNode nodeInput = item.FirstChild;
+                InputType inputType = (InputType)Enum.Parse(typeof(InputType), nodeInput.Name);
 
                 if (inputType.ToString() == InputType.ApiRestInput.ToString()) {
                     ApiRestInput input = new ApiRestInput() {
-                        Name = nodeInput["Name"].InnerText,
+                        Name = nodeInput.Attributes["Name"].Value,
                         Url = nodeInput["Url"].InnerText,
                         Method = nodeInput["Method"].InnerText
                     };
                     flow.Input = input;
                 } else if (inputType.ToString() == InputType.XmlFileInput.ToString()) {
                     XmlFileInput input = new XmlFileInput() {
-                        Name = nodeInput["Name"].InnerText,
+                        Name = nodeInput.Attributes["Name"].Value,
                         Path = nodeInput["Path"].InnerText
                     };
                     flow.Input = input;
                 } else if (inputType.ToString() == InputType.BrokerInput.ToString()) {
                     BrokerInput input = new BrokerInput() {
-                        Name = nodeInput["Name"].InnerText,
+                        Name = nodeInput.Attributes["Name"].Value,
                         Host = nodeInput["Host"].InnerText,
                     };
 
@@ -56,28 +90,29 @@ namespace DataSourcesConverter.Utils {
 
                     flow.Input = input;
                 }
-                XmlNode nodeOutput= item.SelectSingleNode("Output");
 
-                if (nodeOutput != null) {
+                if(item.ChildNodes.Count == 2) {
+                    XmlNode nodeOutput = item.ChildNodes[1];
 
-                    OutputType outType = (OutputType)Enum.Parse(typeof(OutputType), nodeOutput.Attributes["Type"].Value);
+                    OutputType outType = (OutputType)Enum.Parse(typeof(OutputType), nodeOutput.Name);
 
                     if (outType.ToString() == OutputType.ApiRestOutput.ToString()) {
                         ApiRestOutput output = new ApiRestOutput() {
-                            Name = nodeOutput["Name"].InnerText,
+                            Name = nodeOutput.Attributes["Name"].Value,
                             Url = nodeOutput["Url"].InnerText,
                             Method = nodeOutput["Method"].InnerText
                         };
                         flow.Output = output;
                     } else if (outType.ToString() == OutputType.HtmlFileOutput.ToString()) {
                         FileHtmlOutput output = new FileHtmlOutput() {
-                            Name = nodeOutput["Name"].InnerText,
+                            Name = nodeOutput.Attributes["Name"].Value,
                             Path = nodeOutput["Path"].InnerText,
                             Overwrite = nodeOutput["Overwrite"].InnerText.ToUpper() == "TRUE"
                         };
                         flow.Output = output;
                     }
-                }    
+                }
+
                 
                 flows.Add(flow);
             }
@@ -113,16 +148,11 @@ namespace DataSourcesConverter.Utils {
         }
 
         private XmlElement createInput(XmlDocument doc, FlowInput input) {
-            XmlElement i = doc.CreateElement("Input");
-            i.SetAttribute("Type", input.Type.ToString());
-
-            XmlElement name = doc.CreateElement("Name");
-            name.InnerText = input.Name;
-            i.AppendChild(name);
-
-
             if (input.Type == InputType.ApiRestInput) {
                 ApiRestInput apiInput = (ApiRestInput)input;
+
+                XmlElement i = doc.CreateElement(InputType.ApiRestInput.ToString());
+                i.SetAttribute("Name", apiInput.Name);
 
                 XmlElement url = doc.CreateElement("Url");
                 url.InnerText = apiInput.Url;
@@ -132,15 +162,25 @@ namespace DataSourcesConverter.Utils {
                 method.InnerText = apiInput.Method;
                 i.AppendChild(method);
 
+                return i;
+
             } else if (input.Type == InputType.XmlFileInput) {
                 XmlFileInput xmlInput = (XmlFileInput)input;
+
+                XmlElement i = doc.CreateElement(InputType.XmlFileInput.ToString());
+                i.SetAttribute("Name", xmlInput.Name);
 
                 XmlElement path = doc.CreateElement("Path");
                 path.InnerText = xmlInput.Path;
                 i.AppendChild(path);
 
+                return i;
+
             } else if (input.Type == InputType.BrokerInput) {
                 BrokerInput brokerInput = (BrokerInput)input;
+
+                XmlElement i = doc.CreateElement(InputType.BrokerInput.ToString());
+                i.SetAttribute("Name", brokerInput.Name);
 
                 XmlElement host = doc.CreateElement("Host");
                 host.InnerText = brokerInput.Host;
@@ -154,21 +194,24 @@ namespace DataSourcesConverter.Utils {
                 }
                 i.AppendChild(topics);
 
+                return i;
+
+            } else {
+
+                XmlElement i = doc.CreateElement("Input");
+                i.SetAttribute("Name", input.Name);
+
+                return i;
             }
 
-            return i;
         }
 
         private XmlElement createOutput(XmlDocument doc, FlowOutput output) {
-            XmlElement o = doc.CreateElement("Output");
-            o.SetAttribute("Type", output.Type.ToString());
-
-            XmlElement name = doc.CreateElement("Name");
-            name.InnerText = output.Name;
-            o.AppendChild(name);
-
             if (output.Type == OutputType.HtmlFileOutput) {
                 FileHtmlOutput fileOutput = (FileHtmlOutput)output;
+
+                XmlElement o = doc.CreateElement(OutputType.HtmlFileOutput.ToString());
+                o.SetAttribute("Name", fileOutput.Name);
 
                 XmlElement path = doc.CreateElement("Path");
                 path.InnerText = fileOutput.Path;
@@ -178,8 +221,13 @@ namespace DataSourcesConverter.Utils {
                 overwrite.InnerText = fileOutput.Overwrite ? "true" : "false";
                 o.AppendChild(overwrite);
 
+                return o;
+
             } else if (output.Type == OutputType.ApiRestOutput) {
                 ApiRestOutput apiOutput = (ApiRestOutput)output;
+
+                XmlElement o = doc.CreateElement(OutputType.ApiRestOutput.ToString());
+                o.SetAttribute("Name", apiOutput.Name);
 
                 XmlElement url = doc.CreateElement("Url");
                 url.InnerText = apiOutput.Url;
@@ -188,10 +236,17 @@ namespace DataSourcesConverter.Utils {
                 XmlElement method = doc.CreateElement("Method");
                 method.InnerText = apiOutput.Method;
                 o.AppendChild(method);
+
+                return o;
+
+            } else {
+
+                XmlElement o = doc.CreateElement("Output");
+                o.SetAttribute("Name", output.Name);
+
+                return o;
+
             }
-
-
-            return o;
         }
     }
 }

@@ -32,7 +32,6 @@ namespace DataSourcesConverter {
             this.importarXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportarXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.executarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adicionarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rtbLog = new System.Windows.Forms.RichTextBox();
             this.btClearLog = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -72,8 +71,7 @@ namespace DataSourcesConverter {
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dadosToolStripMenuItem,
-            this.executarToolStripMenuItem,
-            this.adicionarToolStripMenuItem});
+            this.executarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1064, 24);
@@ -92,14 +90,14 @@ namespace DataSourcesConverter {
             // importarXMLToolStripMenuItem
             // 
             this.importarXMLToolStripMenuItem.Name = "importarXMLToolStripMenuItem";
-            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.importarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importarXMLToolStripMenuItem.Text = "Importar XML...";
             this.importarXMLToolStripMenuItem.Click += new System.EventHandler(this.importarXMLToolStripMenuItem_Click);
             // 
             // exportarXMLToolStripMenuItem
             // 
             this.exportarXMLToolStripMenuItem.Name = "exportarXMLToolStripMenuItem";
-            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportarXMLToolStripMenuItem.Text = "Exportar XML...";
             this.exportarXMLToolStripMenuItem.Click += new System.EventHandler(this.exportarXMLToolStripMenuItem_Click);
             // 
@@ -110,13 +108,6 @@ namespace DataSourcesConverter {
             this.executarToolStripMenuItem.Text = "Executar";
             this.executarToolStripMenuItem.Click += new System.EventHandler(this.executarToolStripMenuItem_Click);
             // 
-            // adicionarToolStripMenuItem
-            // 
-            this.adicionarToolStripMenuItem.Name = "adicionarToolStripMenuItem";
-            this.adicionarToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
-            this.adicionarToolStripMenuItem.Text = "Adicionar";
-            this.adicionarToolStripMenuItem.Click += new System.EventHandler(this.adicionarToolStripMenuItem_Click);
-            // 
             // rtbLog
             // 
             this.rtbLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -124,14 +115,14 @@ namespace DataSourcesConverter {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rtbLog.Location = new System.Drawing.Point(3, 3);
             this.rtbLog.Name = "rtbLog";
-            this.rtbLog.Size = new System.Drawing.Size(349, 422);
+            this.rtbLog.Size = new System.Drawing.Size(348, 422);
             this.rtbLog.TabIndex = 2;
             this.rtbLog.Text = "";
             // 
             // btClearLog
             // 
             this.btClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btClearLog.Location = new System.Drawing.Point(208, 431);
+            this.btClearLog.Location = new System.Drawing.Point(207, 431);
             this.btClearLog.Name = "btClearLog";
             this.btClearLog.Size = new System.Drawing.Size(148, 28);
             this.btClearLog.TabIndex = 3;
@@ -205,7 +196,6 @@ namespace DataSourcesConverter {
         private System.Windows.Forms.ToolStripMenuItem importarXMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportarXMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem executarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem adicionarToolStripMenuItem;
         private System.Windows.Forms.RichTextBox rtbLog;
         private System.Windows.Forms.Button btClearLog;
         private System.Windows.Forms.SplitContainer splitContainer1;

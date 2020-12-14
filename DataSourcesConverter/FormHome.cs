@@ -263,11 +263,6 @@ namespace DataSourcesConverter {
             }
         }
 
-        private void adicionarToolStripMenuItem_Click(object sender, EventArgs e) {
-            addEmptyTile();
-        }
-
-
         private void log(string level, string line) {
             level = level.ToUpper();
             string text = "";

@@ -29,6 +29,7 @@ namespace DataSourcesConverter.ItemViews {
         private SetOutputCallback setOutputCallback;
 
         public TilesItemView() {
+            InitializeComponent();
         }
 
         public TilesItemView(Flow flow, RunCallback runCallback, SetInputCallback setInputCallback, SetOutputCallback setOutputCallback, DeleteCallback deleteCallback) {

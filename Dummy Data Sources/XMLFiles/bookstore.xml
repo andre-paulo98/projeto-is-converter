@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bookstore>
+  <book category="WEB">
+    <title>Beginning XML</title>
+    <author>Joe Fawcett</author>
+    <year>2012</year>
+    <price>31.30</price>
+    <rate>4</rate>
+  </book>
+  <book category="WEB">
+    <title>Programming .NET Web Services</title>
+    <author>Alex Ferrara</author>
+    <year>2002</year>
+    <price>38.36</price>
+    <rate>3</rate>
+  </book>
+</bookstore>

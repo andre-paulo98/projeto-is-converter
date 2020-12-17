@@ -57,27 +57,33 @@
             // 
             // tbHost
             // 
+            this.tbHost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbHost.Location = new System.Drawing.Point(18, 98);
             this.tbHost.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbHost.Name = "tbHost";
-            this.tbHost.Size = new System.Drawing.Size(312, 26);
+            this.tbHost.Size = new System.Drawing.Size(253, 26);
             this.tbHost.TabIndex = 2;
             // 
             // lboxTopics
             // 
+            this.lboxTopics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lboxTopics.FormattingEnabled = true;
             this.lboxTopics.ItemHeight = 20;
             this.lboxTopics.Location = new System.Drawing.Point(9, 105);
             this.lboxTopics.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lboxTopics.Name = "lboxTopics";
-            this.lboxTopics.Size = new System.Drawing.Size(404, 184);
+            this.lboxTopics.Size = new System.Drawing.Size(345, 144);
             this.lboxTopics.TabIndex = 6;
             this.lboxTopics.SelectedIndexChanged += new System.EventHandler(this.lboxTopics_SelectedIndexChanged);
             // 
             // btSave
             // 
+            this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btSave.Enabled = false;
-            this.btSave.Location = new System.Drawing.Point(340, 491);
+            this.btSave.Location = new System.Drawing.Point(281, 451);
             this.btSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(112, 35);
@@ -88,7 +94,8 @@
             // 
             // btCancel
             // 
-            this.btCancel.Location = new System.Drawing.Point(200, 491);
+            this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btCancel.Location = new System.Drawing.Point(159, 451);
             this.btCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(112, 35);
@@ -99,6 +106,9 @@
             // 
             // gbListTopics
             // 
+            this.gbListTopics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbListTopics.Controls.Add(this.label2);
             this.gbListTopics.Controls.Add(this.btAdd);
             this.gbListTopics.Controls.Add(this.tbTopic);
@@ -109,7 +119,7 @@
             this.gbListTopics.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbListTopics.Name = "gbListTopics";
             this.gbListTopics.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbListTopics.Size = new System.Drawing.Size(435, 349);
+            this.gbListTopics.Size = new System.Drawing.Size(376, 309);
             this.gbListTopics.TabIndex = 10;
             this.gbListTopics.TabStop = false;
             this.gbListTopics.Text = "Lista de Tópicos:";
@@ -126,7 +136,8 @@
             // 
             // btAdd
             // 
-            this.btAdd.Location = new System.Drawing.Point(303, 60);
+            this.btAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAdd.Location = new System.Drawing.Point(244, 60);
             this.btAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(112, 35);
@@ -137,16 +148,19 @@
             // 
             // tbTopic
             // 
+            this.tbTopic.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbTopic.Location = new System.Drawing.Point(12, 63);
             this.tbTopic.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbTopic.Name = "tbTopic";
-            this.tbTopic.Size = new System.Drawing.Size(280, 26);
+            this.tbTopic.Size = new System.Drawing.Size(221, 26);
             this.tbTopic.TabIndex = 4;
             // 
             // btRemove
             // 
+            this.btRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btRemove.Enabled = false;
-            this.btRemove.Location = new System.Drawing.Point(288, 300);
+            this.btRemove.Location = new System.Drawing.Point(229, 260);
             this.btRemove.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btRemove.Name = "btRemove";
             this.btRemove.Size = new System.Drawing.Size(128, 35);
@@ -157,7 +171,8 @@
             // 
             // btConnect
             // 
-            this.btConnect.Location = new System.Drawing.Point(340, 95);
+            this.btConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btConnect.Location = new System.Drawing.Point(281, 95);
             this.btConnect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btConnect.Name = "btConnect";
             this.btConnect.Size = new System.Drawing.Size(112, 35);
@@ -177,16 +192,18 @@
             // 
             // tbName
             // 
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.Location = new System.Drawing.Point(18, 37);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(434, 26);
+            this.tbName.Size = new System.Drawing.Size(375, 26);
             this.tbName.TabIndex = 1;
             // 
             // FormBrokerInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 544);
+            this.ClientSize = new System.Drawing.Size(415, 504);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btConnect);
@@ -198,6 +215,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(301, 450);
             this.Name = "FormBrokerInput";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ler de sistema de mensagens";

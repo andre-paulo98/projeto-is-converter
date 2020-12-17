@@ -40,7 +40,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             // btCancel
             // 
             this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btCancel.Location = new System.Drawing.Point(152, 289);
+            this.btCancel.Location = new System.Drawing.Point(132, 332);
             this.btCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(112, 35);
@@ -53,7 +53,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             // 
             this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btSave.Enabled = false;
-            this.btSave.Location = new System.Drawing.Point(274, 289);
+            this.btSave.Location = new System.Drawing.Point(254, 332);
             this.btSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btSave.Name = "btSave";
             this.btSave.Size = new System.Drawing.Size(112, 35);
@@ -71,7 +71,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             this.rtbResult.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rtbResult.Name = "rtbResult";
             this.rtbResult.ReadOnly = true;
-            this.rtbResult.Size = new System.Drawing.Size(366, 120);
+            this.rtbResult.Size = new System.Drawing.Size(346, 163);
             this.rtbResult.TabIndex = 3;
             this.rtbResult.Text = "";
             // 
@@ -97,13 +97,13 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             this.tbFilePath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbFilePath.Name = "tbFilePath";
             this.tbFilePath.ReadOnly = true;
-            this.tbFilePath.Size = new System.Drawing.Size(325, 26);
+            this.tbFilePath.Size = new System.Drawing.Size(305, 26);
             this.tbFilePath.TabIndex = 1;
             // 
             // btChooseFile
             // 
             this.btChooseFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btChooseFile.Location = new System.Drawing.Point(351, 91);
+            this.btChooseFile.Location = new System.Drawing.Point(331, 91);
             this.btChooseFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btChooseFile.Name = "btChooseFile";
             this.btChooseFile.Size = new System.Drawing.Size(35, 35);
@@ -137,14 +137,14 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.Location = new System.Drawing.Point(18, 32);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(366, 26);
+            this.tbName.Size = new System.Drawing.Size(346, 26);
             this.tbName.TabIndex = 0;
             // 
             // FormXmlFileInput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 336);
+            this.ClientSize = new System.Drawing.Size(384, 379);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -157,6 +157,7 @@ namespace DataSourcesConverter.Components.Inputs.XmlFile {
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(285, 286);
             this.Name = "FormXmlFileInput";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ler ficheiro HTML";

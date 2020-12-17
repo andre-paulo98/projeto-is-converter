@@ -12,7 +12,7 @@ namespace DataSourcesConverter.Components.Output.FileHtml {
             fileHtml = fileHtmlOutput;
             tbName.Text = fileHtml.Name;
             tbPath.Text = fileHtml.Path;
-            fileHtml.Overwrite = cbNewFile.Checked;
+            cbNewFile.Checked = fileHtml.Overwrite;
         }
 
         private void btOpenFileDialog_Click(object sender, EventArgs e) {

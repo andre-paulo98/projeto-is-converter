@@ -1,4 +1,4 @@
-Grupo: 2
+Grupo: D02
 Elementos:
 	2181841 - André Alberto Paulo Duivenvoorden - 2181841@my.ipleiria.pt
 	2181858 - André Alexandre dos Santos Vicente - 2181858@my.ipleiria.pt

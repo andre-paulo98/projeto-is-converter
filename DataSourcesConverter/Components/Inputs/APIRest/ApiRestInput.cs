@@ -39,6 +39,8 @@ namespace DataSourcesConverter.Components.Inputs.APIRest {
                 
                 HttpWebRequest request = WebRequest.CreateHttp(Url);
                 request.Method = Method;
+                request.Accept = "application/json";
+                request.ContentType = "application/json";
 
                 if (log)
                     Logger.Instance.status(Name, "A executar o pedido HTTP...");
@@ -46,6 +48,15 @@ namespace DataSourcesConverter.Components.Inputs.APIRest {
                 using (Stream responseStream = response.GetResponseStream())
                 using (StreamReader myStreamReader = new StreamReader(responseStream, Encoding.UTF8)) {
                     json = myStreamReader.ReadToEnd();
+                    JToken.Parse(json);
+                }
+            } catch (JsonReaderException) {
+                Exception e = new Exception("Tipo de dados não suportado\nPor favor certifique-se que o conteudo devolvido está no formato JSON");
+                if (log) {
+                    Logger.Instance.error(Name, "Erro a efetuar o pedido: ");
+                    Logger.Instance.status(Name, e.Message);
+                } else {
+                    throw e;
                 }
             } catch (Exception e) {
                 if (log) {
